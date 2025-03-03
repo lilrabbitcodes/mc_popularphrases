@@ -525,10 +525,11 @@ def main():
         # Create flashcard container
         st.markdown('<div class="flashcard-container">', unsafe_allow_html=True)
         
-        # Simplified image container for better centering
+        # Enhanced image container for better centering using columns
         st.markdown('<div class="image-container">', unsafe_allow_html=True)
-        # Set a smaller width directly in the st.image function for better control
-        st.image(current_card['meme_url'], width=160, use_column_width=False)
+        col1, col2, col3 = st.columns([1, 2, 1])
+        with col2:  # Use only the middle column
+            st.image(current_card['meme_url'], width=160, use_column_width=True)
         st.markdown('</div>', unsafe_allow_html=True)
         
         # Text content
@@ -551,13 +552,13 @@ def main():
             st.warning("Audio not available", icon="🔇")
             print(f"Audio error: {str(e)}")
         
-        # Next button right after audio
+        # English definition
+        st.markdown(f'<div class="english-text">{current_card["english"]}</div>', unsafe_allow_html=True)
+        
+        # Next button AFTER the English definition
         if st.button("Next →", key="next_button"):
             st.session_state.index = (st.session_state.index + 1) % len(flashcards)
             st.rerun()
-        
-        # English definition
-        st.markdown(f'<div class="english-text">{current_card["english"]}</div>', unsafe_allow_html=True)
         
         st.markdown('</div>', unsafe_allow_html=True)
         
