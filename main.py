@@ -47,7 +47,7 @@ st.markdown("""
             max-width: none !important;
             display: flex !important;
             justify-content: center !important;
-            align-items: center !important;
+            align-items: flex-start !important;
             height: 100vh !important;
             overflow: hidden !important;
         }
@@ -58,18 +58,19 @@ st.markdown("""
             flex-direction: column !important;
             align-items: center !important;
             justify-content: flex-start !important;
-            padding: 1rem !important;
+            padding: 0.5rem !important;
             margin: 0 auto !important;
             max-width: 600px !important;
             width: 100% !important;
             height: 100vh !important;
             box-sizing: border-box !important;
+            gap: 0.3rem !important;
         }
         
         /* Image container */
         .image-container {
             width: 100% !important;
-            height: 35vh !important;
+            height: 30vh !important;
             display: flex !important;
             justify-content: center !important;
             align-items: center !important;
@@ -88,11 +89,11 @@ st.markdown("""
             display: flex !important;
             flex-direction: column !important;
             align-items: center !important;
-            justify-content: center !important;
+            justify-content: flex-start !important;
             width: 100% !important;
-            padding: 1rem !important;
-            flex: 1 !important;
-            gap: 0.8rem !important;
+            padding: 0 !important;
+            gap: 0.3rem !important;
+            margin-top: -0.5rem !important;
         }
         
         /* Text container */
@@ -100,15 +101,14 @@ st.markdown("""
             display: flex !important;
             flex-direction: column !important;
             align-items: center !important;
-            justify-content: center !important;
+            justify-content: flex-start !important;
             width: 100% !important;
-            gap: 0.5rem !important;
-            margin-top: 1rem !important;
+            gap: 0.3rem !important;
         }
         
         /* Text styles */
         .chinese-text {
-            font-size: 2.2rem !important;
+            font-size: 2rem !important;
             font-weight: bold !important;
             margin: 0 !important;
             text-align: center !important;
@@ -117,7 +117,7 @@ st.markdown("""
         }
         
         .pinyin-text {
-            font-size: 1.3rem !important;
+            font-size: 1.2rem !important;
             color: #666 !important;
             margin: 0 !important;
             text-align: center !important;
@@ -126,7 +126,7 @@ st.markdown("""
         }
         
         .english-text {
-            font-size: 1.1rem !important;
+            font-size: 1rem !important;
             margin: 0 !important;
             text-align: center !important;
             width: 100% !important;
@@ -138,15 +138,15 @@ st.markdown("""
         .stAudio {
             display: flex !important;
             justify-content: center !important;
-            margin: 0.5rem auto !important;
+            margin: 0.2rem auto !important;
             width: 80% !important;
             max-width: 300px !important;
         }
         
         .stAudio > audio {
             width: 100% !important;
-            height: 36px !important;
-            border-radius: 18px !important;
+            height: 32px !important;
+            border-radius: 16px !important;
         }
         
         /* Button styles */
@@ -154,8 +154,7 @@ st.markdown("""
             display: flex !important;
             justify-content: center !important;
             width: 100% !important;
-            margin-top: auto !important;
-            padding: 1rem 0 !important;
+            margin: 0.5rem 0 !important;
         }
         
         .stButton > button {
@@ -503,13 +502,12 @@ def main():
         # English definition
         st.markdown(f'<div class="english-text">{current_card["english"]}</div>', unsafe_allow_html=True)
         
-        st.markdown('</div>', unsafe_allow_html=True)  # Close text-container
-        
         # Next button
         if st.button("Next Card"):
             st.session_state.index = (st.session_state.index + 1) % len(flashcards)
             st.rerun()
         
+        st.markdown('</div>', unsafe_allow_html=True)  # Close text-container
         st.markdown('</div>', unsafe_allow_html=True)  # Close content-wrapper
         st.markdown('</div>', unsafe_allow_html=True)  # Close flashcard-container
 
