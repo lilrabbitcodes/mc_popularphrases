@@ -57,14 +57,13 @@ st.markdown("""
             display: flex !important;
             flex-direction: column !important;
             align-items: center !important;
-            justify-content: space-between !important;
-            padding: 0.5rem !important;
+            justify-content: flex-start !important;
+            padding: 1rem !important;
             margin: 0 auto !important;
             max-width: 600px !important;
             width: 100% !important;
-            height: 95vh !important;
+            height: 100vh !important;
             box-sizing: border-box !important;
-            gap: 0.5rem !important;
         }
         
         /* Image container */
@@ -84,35 +83,62 @@ st.markdown("""
             object-fit: contain !important;
         }
         
+        /* Content wrapper */
+        .content-wrapper {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 100% !important;
+            padding: 1rem !important;
+            flex: 1 !important;
+            gap: 0.8rem !important;
+        }
+        
+        /* Text container */
+        .text-container {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 100% !important;
+            gap: 0.5rem !important;
+            margin-top: 1rem !important;
+        }
+        
         /* Text styles */
         .chinese-text {
-            font-size: 2rem !important;
+            font-size: 2.2rem !important;
             font-weight: bold !important;
-            margin: 0.3rem 0 !important;
+            margin: 0 !important;
             text-align: center !important;
             width: 100% !important;
+            line-height: 1.2 !important;
         }
         
         .pinyin-text {
-            font-size: 1.2rem !important;
+            font-size: 1.3rem !important;
             color: #666 !important;
-            margin: 0.2rem 0 !important;
+            margin: 0 !important;
             text-align: center !important;
             width: 100% !important;
+            line-height: 1.2 !important;
         }
         
         .english-text {
-            font-size: 1rem !important;
-            margin: 0.3rem 0 !important;
+            font-size: 1.1rem !important;
+            margin: 0 !important;
             text-align: center !important;
             width: 100% !important;
+            line-height: 1.2 !important;
+            color: #333 !important;
         }
         
         /* Audio styles */
         .stAudio {
             display: flex !important;
             justify-content: center !important;
-            margin: 0.3rem auto !important;
+            margin: 0.5rem auto !important;
             width: 80% !important;
             max-width: 300px !important;
         }
@@ -128,7 +154,8 @@ st.markdown("""
             display: flex !important;
             justify-content: center !important;
             width: 100% !important;
-            margin: 0.5rem 0 !important;
+            margin-top: auto !important;
+            padding: 1rem 0 !important;
         }
         
         .stButton > button {
@@ -139,17 +166,6 @@ st.markdown("""
             border: none !important;
             width: auto !important;
             min-width: 120px !important;
-        }
-
-        /* Content wrapper */
-        .content-wrapper {
-            display: flex !important;
-            flex-direction: column !important;
-            align-items: center !important;
-            justify-content: center !important;
-            width: 100% !important;
-            gap: 0.3rem !important;
-            flex: 1 !important;
         }
     </style>
 """, unsafe_allow_html=True)
@@ -459,13 +475,16 @@ def main():
         # Main container
         st.markdown('<div class="flashcard-container">', unsafe_allow_html=True)
         
-        # Content wrapper
-        st.markdown('<div class="content-wrapper">', unsafe_allow_html=True)
-        
         # Image
         st.markdown('<div class="image-container">', unsafe_allow_html=True)
         st.image(current_card['meme_url'])
         st.markdown('</div>', unsafe_allow_html=True)
+        
+        # Content wrapper
+        st.markdown('<div class="content-wrapper">', unsafe_allow_html=True)
+        
+        # Text container
+        st.markdown('<div class="text-container">', unsafe_allow_html=True)
         
         # Chinese text
         st.markdown(f'<div class="chinese-text">{current_card["chinese"]}</div>', unsafe_allow_html=True)
@@ -483,6 +502,8 @@ def main():
         
         # English definition
         st.markdown(f'<div class="english-text">{current_card["english"]}</div>', unsafe_allow_html=True)
+        
+        st.markdown('</div>', unsafe_allow_html=True)  # Close text-container
         
         # Next button
         if st.button("Next Card"):
