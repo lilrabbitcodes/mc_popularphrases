@@ -263,12 +263,10 @@ def get_audio_url(text):
         
         if text in audio_urls:
             file_id = audio_urls[text]
-            # First request to get the confirmation token
             url = f"https://drive.google.com/uc?id={file_id}&export=download"
             session = requests.Session()
             response = session.get(url, stream=True)
             
-            # Check if there's a download warning (for large files)
             for key, value in response.cookies.items():
                 if key.startswith('download_warning'):
                     token = value
@@ -279,24 +277,21 @@ def get_audio_url(text):
             if response.status_code == 200:
                 return BytesIO(response.content)
             
-            # If Google Drive fails, try fallback to gTTS
-            try:
-                audio_path = generate_audio(text)
-                with open(audio_path, 'rb') as f:
-                    return BytesIO(f.read())
-            except:
-                pass
+        # Fallback to gTTS
+        audio_path = generate_audio(text)
+        with open(audio_path, 'rb') as f:
+            return BytesIO(f.read())
                 
-        return None
     except Exception as e:
-        print(f"Error getting audio: {str(e)}")  # Add error logging
-        # Try fallback to gTTS
+        print(f"Error getting audio: {str(e)}")
         try:
             audio_path = generate_audio(text)
             with open(audio_path, 'rb') as f:
                 return BytesIO(f.read())
         except:
             return None
+    
+    return None
 
 # Flashcard data
 flashcards = [
@@ -489,134 +484,6 @@ def main():
 
     # Get current flashcard
     current_card = flashcards[st.session_state.index]
-    
-    # Styling with proper centering
-    st.markdown("""
-        <style>
-            /* Hide Streamlit elements */
-            footer {display: none !important;}
-            #MainMenu {display: none !important;}
-            header {display: none !important;}
-            
-            /* Center the main block container */
-            .block-container {
-                max-width: 800px !important;
-                padding-top: 1rem !important;
-                padding-bottom: 1rem !important;
-                margin: 0 auto !important;
-            }
-            
-            /* Container styles */
-            .flashcard-container {
-                display: flex !important;
-                flex-direction: column !important;
-                align-items: center !important;
-                justify-content: space-between !important;
-                padding: 0.5rem !important;
-                margin: 0 auto !important;
-                max-width: 600px !important;
-                text-align: center !important;
-                height: 100vh !important;
-                box-sizing: border-box !important;
-            }
-            
-            /* Image styles */
-            .image-container {
-                width: 100% !important;
-                height: 35vh !important;
-                margin: 0 auto !important;
-                display: flex !important;
-                justify-content: center !important;
-                align-items: center !important;
-                padding: 0.5rem !important;
-            }
-            
-            .image-container img {
-                max-width: 100% !important;
-                max-height: 100% !important;
-                object-fit: contain !important;
-            }
-            
-            /* Text styles */
-            .chinese-text {
-                font-size: 28px !important;
-                font-weight: bold !important;
-                margin: 5px 0 !important;
-                text-align: center !important;
-                width: 100% !important;
-            }
-            
-            .pinyin-text {
-                font-size: 18px !important;
-                color: #666 !important;
-                margin: 2px 0 !important;
-                text-align: center !important;
-                width: 100% !important;
-            }
-            
-            .english-text {
-                font-size: 16px !important;
-                margin: 5px 0 !important;
-                text-align: center !important;
-                width: 100% !important;
-            }
-            
-            /* Audio styles */
-            .stAudio {
-                display: flex !important;
-                justify-content: center !important;
-                margin: 5px auto !important;
-                width: 200px !important;
-            }
-            
-            .stAudio > audio {
-                width: 200px !important;
-                height: 40px !important;
-                border-radius: 20px !important;
-                background-color: #f0f2f6 !important;
-            }
-            
-            audio::-webkit-media-controls-panel {
-                background-color: #f0f2f6 !important;
-                justify-content: flex-start !important;
-            }
-            
-            audio::-webkit-media-controls-play-button {
-                transform: scale(1.2) !important;
-                margin-right: 10px !important;
-            }
-            
-            audio::-webkit-media-controls-timeline {
-                display: flex !important;
-                margin: 0 10px !important;
-            }
-            
-            audio::-webkit-media-controls-current-time-display,
-            audio::-webkit-media-controls-time-remaining-display,
-            audio::-webkit-media-controls-volume-slider,
-            audio::-webkit-media-controls-mute-button {
-                display: none !important;
-            }
-            
-            /* Button styles */
-            .stButton {
-                display: flex !important;
-                justify-content: center !important;
-                width: 100% !important;
-                margin-bottom: 10px !important;
-            }
-            
-            .stButton > button {
-                margin: 0 !important;
-                padding: 8px 24px !important;
-                font-size: 16px !important;
-                border-radius: 20px !important;
-                background-color: #f0f2f6 !important;
-                border: none !important;
-                width: 120px !important;
-            }
-        </style>
-    """, unsafe_allow_html=True)
     
     # Main container
     st.markdown('<div class="flashcard-container">', unsafe_allow_html=True)
