@@ -426,54 +426,60 @@ def main():
     # Initialize session state
     if 'index' not in st.session_state:
         st.session_state.index = 0
-
+    
+    try:
         # Get current flashcard
         current_card = flashcards[st.session_state.index]
         
-    # Create flashcard container
-    st.markdown('<div class="flashcard-container">', unsafe_allow_html=True)
-    
-    # Image
-    st.markdown('<div class="image-container">', unsafe_allow_html=True)
-    st.image(current_card['meme_url'], use_column_width=True)
-    st.markdown('</div>', unsafe_allow_html=True)
-    
-    # Text content
-    st.markdown('<div class="text-content">', unsafe_allow_html=True)
-    st.markdown(f"### {current_card['chinese']}")
-    st.markdown(f"*{current_card['pinyin']}*")
-    
-    # Audio
-    try:
-        audio_bytes = get_audio_url(current_card["chinese"])
-        if audio_bytes:
-            st.audio(audio_bytes, format='audio/mp3', start_time=0)
-        else:
+        # Create flashcard container
+        st.markdown('<div class="flashcard-container">', unsafe_allow_html=True)
+        
+        # Image
+        st.markdown('<div class="image-container">', unsafe_allow_html=True)
+        st.image(current_card['meme_url'], use_column_width=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+        
+        # Text content
+        st.markdown('<div class="text-content">', unsafe_allow_html=True)
+        st.markdown(f"### {current_card['chinese']}")
+        st.markdown(f"*{current_card['pinyin']}*")
+        
+        # Audio
+        try:
+            audio_bytes = get_audio_url(current_card["chinese"])
+            if audio_bytes:
+                st.audio(audio_bytes, format='audio/mp3', start_time=0)
+            else:
+                st.warning("Audio not available", icon="🔇")
+        except Exception as e:
             st.warning("Audio not available", icon="🔇")
-    except Exception as e:
-        st.warning("Audio not available", icon="🔇")
-        print(f"Audio error: {str(e)}")
+            print(f"Audio error: {str(e)}")
         
         # English definition
-    st.markdown(f"**{current_card['english']}**")
-    st.markdown('</div>', unsafe_allow_html=True)
-    
-    # Navigation buttons
-    st.markdown('<div class="button-container">', unsafe_allow_html=True)
-    col1, col2 = st.columns([1, 1])
-    
-    with col1:
-        if st.button("← Back"):
-            st.session_state.index = (st.session_state.index - 1) % len(flashcards)
-            st.rerun()
-    
-    with col2:
-        if st.button("Next →"):
-            st.session_state.index = (st.session_state.index + 1) % len(flashcards)
-            st.rerun()
+        st.markdown(f"**{current_card['english']}**")
+        st.markdown('</div>', unsafe_allow_html=True)
         
-    st.markdown('</div>', unsafe_allow_html=True)
-    st.markdown('</div>', unsafe_allow_html=True)
+        # Navigation buttons
+        st.markdown('<div class="button-container">', unsafe_allow_html=True)
+        col1, col2 = st.columns([1, 1])
+        
+        with col1:
+            if st.button("← Back"):
+                st.session_state.index = (st.session_state.index - 1) % len(flashcards)
+                st.rerun()
+        
+        with col2:
+            if st.button("Next →"):
+                st.session_state.index = (st.session_state.index + 1) % len(flashcards)
+                st.rerun()
+        
+        st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+    
+    except Exception as e:
+        st.error("Error loading flashcard")
+        print(f"Error: {str(e)}")
+        st.session_state.index = 0
 
 if __name__ == "__main__":
     main()
