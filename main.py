@@ -110,6 +110,80 @@ st.markdown("""
             width: 100% !important;
             height: 100% !important;
         }
+        
+        /* Audio container styling */
+        .audio-container {
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            width: 100% !important;
+            margin: 15px auto !important;
+        }
+        
+        .audio-container audio {
+            width: 35px !important;
+            height: 35px !important;
+            border-radius: 50% !important;
+            background-color: #666666 !important;
+        }
+        
+        /* Hide audio controls except play button */
+        .audio-container audio::-webkit-media-controls-panel {
+            background-color: #666666 !important;
+            display: flex !important;
+            justify-content: center !important;
+        }
+        
+        .audio-container audio::-webkit-media-controls-play-button {
+            transform: scale(1.2) !important;
+            margin: 0 !important;
+        }
+        
+        .audio-container audio::-webkit-media-controls-timeline,
+        .audio-container audio::-webkit-media-controls-current-time-display,
+        .audio-container audio::-webkit-media-controls-time-remaining-display,
+        .audio-container audio::-webkit-media-controls-volume-slider,
+        .audio-container audio::-webkit-media-controls-mute-button {
+            display: none !important;
+        }
+        
+        /* Center all content */
+        .main-container {
+            max-height: 100vh !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            padding: 10px !important;
+            text-align: center !important;
+        }
+        
+        .text-content {
+            width: 100% !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            margin: 10px 0 !important;
+        }
+        
+        .character, .pinyin, .explanation {
+            width: 100% !important;
+            text-align: center !important;
+        }
+        
+        .image-container {
+            width: 100% !important;
+            display: flex !important;
+            justify-content: center !important;
+            margin-bottom: 15px !important;
+        }
+        
+        .button-container {
+            width: 100% !important;
+            display: flex !important;
+            justify-content: center !important;
+            margin-top: 15px !important;
+        }
     </style>
 """, unsafe_allow_html=True)
 
@@ -130,232 +204,25 @@ except ImportError as e:
     except Exception as e:
         st.error(f"Failed to install packages: {str(e)}")
 
-# CSS styles
-st.markdown("""
-    <style>
-.stApp {
-    background-color: white !important;
-    padding: 5px 10px !important;
-    color: black !important;
-}
+def get_audio_path(text, lang='zh-cn'):
+    """Generate audio file path based on text hash"""
+    # Create audio directory if it doesn't exist
+    os.makedirs('audio_cache', exist_ok=True)
+    
+    # Generate unique filename based on text and language
+    filename = hashlib.md5(f"{text}_{lang}".encode()).hexdigest() + ".mp3"
+    return os.path.join('audio_cache', filename)
 
-.character {
-    font-size: 36px;
-    font-weight: bold;
-    margin: 10px 0;
-    text-align: center;
-    color: black !important;
-}
-
-.pinyin {
-    font-size: 18px;
-    color: #666;
-    margin: 5px 0;
-    text-align: center;
-}
-
-.explanation {
-    font-size: 16px;
-    margin: 10px 0;
-    text-align: center;
-    text-transform: uppercase;
-    font-weight: bold;
-    color: black !important;
-}
-
-/* Button styling */
-.stButton {
-    text-align: center !important;
-    display: flex !important;
-    justify-content: center !important;
-}
-
-.stButton > button {
-    background-color: white !important;
-    color: black !important;
-    border: 2px solid black !important;
-    border-radius: 5px !important;
-    padding: 5px 15px !important;
-    font-weight: 500 !important;
-    margin: 0 auto !important;
-}
-
-.stButton > button:hover {
-    background-color: #f0f0f0 !important;
-    border-color: black !important;
-        }
-        
-        /* Audio player styling */
-.stAudio {
-    width: 50% !important;
-    margin: 5px auto !important;
-    display: flex !important;
-    justify-content: center !important;
-}
-
-.stAudio > audio {
-    width: 90px !important;
-    height: 30px !important;
-}
-
-audio::-webkit-media-controls-panel {
-    background-color: #666666 !important;  /* Darker grey */
-}
-
-audio::-webkit-media-controls-play-button {
-    transform: scale(1.2) !important;
-    margin: 0 8px !important;
-    color: white !important;
-}
-
-audio::-webkit-media-controls-current-time-display,
-audio::-webkit-media-controls-time-remaining-display {
-    color: white !important;
-    font-size: 12px !important;
-}
-
-/* Center column content */
-[data-testid="column"] {
-    display: flex !important;
-    justify-content: center !important;
-}
-
-/* Mobile optimization */
-.main-container {
-    max-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 10px;
-}
-
-/* Adjust image container */
-.image-container {
-    flex: 0 0 auto;
-    margin-bottom: 10px;
-}
-
-/* Text content */
-.text-content {
-    flex: 0 0 auto;
-    margin: 10px 0;
-}
-
-/* Button container */
-.button-container {
-    flex: 0 0 auto;
-    margin-top: 10px;
-}
-
-/* Audio container styling */
-.audio-container {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-            width: 100% !important;
-    margin: 15px auto !important;
-}
-
-.audio-container audio {
-    width: 35px !important;
-    height: 35px !important;
-    border-radius: 50% !important;
-    background-color: #666666 !important;
-}
-
-/* Hide audio controls except play button */
-.audio-container audio::-webkit-media-controls-panel {
-    background-color: #666666 !important;
-    display: flex !important;
-    justify-content: center !important;
-}
-
-.audio-container audio::-webkit-media-controls-play-button {
-    transform: scale(1.2) !important;
-            margin: 0 !important;
-        }
-        
-.audio-container audio::-webkit-media-controls-timeline,
-.audio-container audio::-webkit-media-controls-current-time-display,
-.audio-container audio::-webkit-media-controls-time-remaining-display,
-.audio-container audio::-webkit-media-controls-volume-slider,
-.audio-container audio::-webkit-media-controls-mute-button {
-    display: none !important;
-}
-
-/* Center all content */
-.main-container {
-    max-height: 100vh !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-    padding: 10px !important;
-    text-align: center !important;
-}
-
-.text-content {
-    width: 100% !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    margin: 10px 0 !important;
-}
-
-.character, .pinyin, .explanation {
-    width: 100% !important;
-    text-align: center !important;
-}
-
-.image-container {
-    width: 100% !important;
-    display: flex !important;
-    justify-content: center !important;
-    margin-bottom: 15px !important;
-}
-
-.button-container {
-    width: 100% !important;
-    display: flex !important;
-    justify-content: center !important;
-    margin-top: 15px !important;
-        }
-    </style>
-""", unsafe_allow_html=True)
-
-def get_audio(text):
-    """Simple audio generation"""
-    try:
-        # Special cases for pronunciation
-        special_cases = {
-            "HHHH": "哈哈哈哈",
-            "666": "六六六",
-            "88": "八八",
-            "3Q": "三Q",
-            "WC": "哇草",
-            "SB": "傻逼",
-            "6": "六",
-            "city不city": "city 不 city"
-        }
-        
-        # English words to pronounce as-is
-        english_words = ["Vlog", "Flag", "Crush", "Emo"]
-        
-        # Generate audio
-        if text in english_words:
-            tts = gTTS(text=text, lang='en', slow=False)
-        elif text in special_cases:
-            tts = gTTS(text=special_cases[text], lang='zh-cn', slow=False)
-        else:
-            tts = gTTS(text=text, lang='zh-cn', slow=False)
-            
-        # Save to BytesIO
-        audio_bytes = BytesIO()
-        tts.write_to_fp(audio_bytes)
-        audio_bytes.seek(0)
-        return audio_bytes.read()
-    except:
-        return None
+def generate_audio(text, lang='zh-cn'):
+    """Generate audio file for given text if it doesn't exist"""
+    audio_path = get_audio_path(text, lang)
+    
+    # Generate audio file if it doesn't exist
+    if not os.path.exists(audio_path):
+        tts = gTTS(text=text, lang=lang)
+        tts.save(audio_path)
+    
+    return audio_path
 
 def get_audio_url(text):
     """Get audio URL from Google Drive"""
@@ -396,13 +263,40 @@ def get_audio_url(text):
         
         if text in audio_urls:
             file_id = audio_urls[text]
+            # First request to get the confirmation token
             url = f"https://drive.google.com/uc?id={file_id}&export=download"
-            response = requests.get(url, stream=True)
+            session = requests.Session()
+            response = session.get(url, stream=True)
+            
+            # Check if there's a download warning (for large files)
+            for key, value in response.cookies.items():
+                if key.startswith('download_warning'):
+                    token = value
+                    url = f"{url}&confirm={token}"
+                    response = session.get(url, stream=True)
+                    break
+            
             if response.status_code == 200:
                 return BytesIO(response.content)
+            
+            # If Google Drive fails, try fallback to gTTS
+            try:
+                audio_path = generate_audio(text)
+                with open(audio_path, 'rb') as f:
+                    return BytesIO(f.read())
+            except:
+                pass
+                
         return None
-    except:
-        return None
+    except Exception as e:
+        print(f"Error getting audio: {str(e)}")  # Add error logging
+        # Try fallback to gTTS
+        try:
+            audio_path = generate_audio(text)
+            with open(audio_path, 'rb') as f:
+                return BytesIO(f.read())
+        except:
+            return None
 
 # Flashcard data
 flashcards = [
@@ -619,11 +513,18 @@ def main():
         """, unsafe_allow_html=True)
         
         # Audio below pinyin
-        audio_bytes = get_audio_url(current_card["chinese"])
-        if audio_bytes:
-            col1, col2, col3 = st.columns([1,2,1])
-            with col2:
+        try:
+            audio_bytes = get_audio_url(current_card["chinese"])
+            if audio_bytes:
+                st.markdown("""
+                    <div class="audio-container">
+                """, unsafe_allow_html=True)
                 st.audio(audio_bytes, format='audio/mp3')
+                st.markdown("</div>", unsafe_allow_html=True)
+            else:
+                st.warning("Audio not available for this phrase", icon="⚠️")
+        except Exception as e:
+            st.error(f"Error playing audio: {str(e)}", icon="🚨")
         
         # English definition
         st.markdown(f"""
