@@ -20,43 +20,43 @@ st.markdown("""
         header {display: none !important;}
         .stDeployButton {display: none !important;}
         
-        /* Main container - shifted up */
+        /* Main container - absolute top positioning */
         .main .block-container {
             padding: 0 !important;
             max-width: 100% !important;
             margin: 0 !important;
             display: flex !important;
             justify-content: center !important;
-            align-items: flex-start !important; /* Align to the top */
-            min-height: 100vh !important;
+            align-items: flex-start !important;
+            min-height: auto !important;
             padding-top: 0 !important;
-            margin-top: -20px !important; /* Shift everything up */
+            margin-top: -50px !important; /* Aggressive shift up */
         }
         
-        /* Flashcard container - reduced vertical spacing */
+        /* Flashcard container - maximum compression */
         .flashcard-container {
             display: flex !important;
             flex-direction: column !important;
             align-items: center !important;
             justify-content: flex-start !important;
-            gap: 0.15rem !important; /* Reduced gap */
+            gap: 0 !important; /* No gap between elements */
             width: 100% !important;
             max-width: 350px !important;
             margin: 0 auto !important;
-            padding: 0.1rem !important; /* Reduced padding */
-            margin-top: -10px !important; /* Additional shift up */
+            padding: 0 !important; /* No padding */
+            margin-top: -20px !important; /* Additional shift up */
         }
         
-        /* Image container - reduced margin */
+        /* Image container - minimal height */
         .image-container {
             width: 100% !important; 
             display: flex !important;
             justify-content: center !important;
             align-items: center !important;
             text-align: center !important;
-            margin: 5px auto !important; /* Reduced margin from 10px to 5px */
+            margin: 0 auto !important; /* No margin */
             padding: 0 !important;
-            min-height: 160px !important;
+            min-height: 120px !important; /* Reduced height */
             position: relative !important;
             left: 50% !important;
             transform: translateX(-50%) !important;
@@ -85,7 +85,7 @@ st.markdown("""
             margin: 0 auto !important;
         }
         
-        /* Text styles */
+        /* Compressed text spacing */
         .text-content {
             text-align: center !important;
             width: 100% !important;
@@ -94,22 +94,13 @@ st.markdown("""
             flex-direction: column !important;
             align-items: center !important;
             justify-content: center !important;
-            gap: 0.2rem !important;
+            gap: 0 !important; /* No gap */
             padding: 0 !important;
         }
         
-        .text-content h3 {
-            margin: 0 auto !important;
-            font-size: 1.6rem !important;
-            text-align: center !important;
-            width: 100% !important;
-            padding: 0 !important;
-        }
-        
-        .text-content p, .text-content div {
-            margin: 0 auto !important;
-            text-align: center !important;
-            width: 100% !important;
+        /* Minimized vertical spacing for all elements */
+        .chinese-text, .pinyin-text, .english-text, .stAudio {
+            margin: 3px auto !important;
             padding: 0 !important;
         }
         
