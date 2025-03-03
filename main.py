@@ -60,9 +60,9 @@ st.markdown("""
         }
         
         .image-container img {
-            max-height: 15vh !important;
+            max-height: 45vh !important;
             width: auto !important;
-            max-width: 150px !important;
+            max-width: 450px !important;
             margin-left: auto !important;
             margin-right: auto !important;
             display: block !important;
@@ -79,6 +79,11 @@ st.markdown("""
                 left: 50% !important;
                 transform: translateX(-50%) !important;
                 width: 100% !important;
+            }
+            
+            .image-container img {
+                max-width: 90% !important;
+                max-height: 35vh !important;
             }
         }
         
@@ -500,9 +505,9 @@ def main():
         
         # Image
         st.markdown('<div class="image-container">', unsafe_allow_html=True)
-        col_img = st.columns([1,2,1])  # Create 3 columns with middle one being larger
+        col_img = st.columns([1,3,1])  # Adjusted column ratio for larger image
         with col_img[1]:  # Use only the middle column
-            st.image(current_card['meme_url'], width=100)  # Set fixed width
+            st.image(current_card['meme_url'], width=420)  # Increased from 140 to 420 (3x)
         st.markdown('</div>', unsafe_allow_html=True)
         
         # Text content
