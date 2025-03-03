@@ -156,7 +156,7 @@ def generate_audio(text, lang='zh-cn'):
     return audio_path
 
 def get_audio_url(text):
-    """Get audio URL from Google Drive"""
+    """Get audio URL from Google Drive or generate using gTTS"""
     try:
         # Map Chinese text to Google Drive URLs
         audio_urls = {
@@ -191,38 +191,41 @@ def get_audio_url(text):
             "搞钱": "1ZzZAFqz3Vymss6HQhW82ERrV0Nt16ZBi",
             "丢人": "1Vkm4Hk8Bu8ycglqPrtEqFPZM9BF1Hy_v"
         }
-        
+
         if text in audio_urls:
             file_id = audio_urls[text]
-            url = f"https://drive.google.com/uc?id={file_id}&export=download"
+            url = f"https://drive.google.com/uc?id={file_id}"
+            
+            # Create a session to handle redirects
             session = requests.Session()
+            
+            # First request to get the confirmation token if needed
             response = session.get(url, stream=True)
             
-            for key, value in response.cookies.items():
-                if key.startswith('download_warning'):
-                    token = value
-                    url = f"{url}&confirm={token}"
-                    response = session.get(url, stream=True)
-                    break
+            # Check if we need to handle the confirmation page
+            if "download_warning" in response.cookies:
+                token = response.cookies["download_warning"]
+                url = f"{url}&confirm={token}"
+                response = session.get(url, stream=True)
             
+            # If we got the file successfully, return it
             if response.status_code == 200:
                 return BytesIO(response.content)
-            
-        # Fallback to gTTS
-        audio_path = generate_audio(text)
-        with open(audio_path, 'rb') as f:
-            return BytesIO(f.read())
-                
+        
+        # If we couldn't get the audio from Google Drive, fall back to gTTS
+        return BytesIO(open(generate_audio(text), 'rb').read())
+        
     except Exception as e:
         print(f"Error getting audio: {str(e)}")
         try:
+            # Try generating audio with gTTS as fallback
             audio_path = generate_audio(text)
             with open(audio_path, 'rb') as f:
                 return BytesIO(f.read())
         except Exception as e:
             print(f"Failed to generate fallback audio: {str(e)}")
             return None
-    
+
     return None
 
 # Flashcard data
