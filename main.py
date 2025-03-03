@@ -27,7 +27,7 @@ st.markdown("""
             margin: 0 !important;
             display: flex !important;
             justify-content: center !important;
-            align-items: center !important;
+            align-items: flex-start !important;
             min-height: 100vh !important;
             padding-top: 0 !important;
         }
@@ -37,18 +37,18 @@ st.markdown("""
             display: flex !important;
             flex-direction: column !important;
             align-items: center !important;
-            justify-content: center !important;
-            gap: 0.3rem !important;
-            width: 90% !important;
-            max-width: 400px !important;
+            justify-content: flex-start !important;
+            gap: 0.2rem !important;
+            width: 100% !important;
+            max-width: 350px !important;
             margin: 0 auto !important;
-            padding: 0.3rem !important;
+            padding: 0.2rem !important;
         }
         
         /* Image container */
         .image-container {
-            width: 80% !important;
-            max-height: 20vh !important;
+            width: 70% !important;
+            max-height: 15vh !important;
             display: flex !important;
             justify-content: center !important;
             align-items: center !important;
@@ -57,8 +57,8 @@ st.markdown("""
         }
         
         .image-container img {
-            max-height: 20vh !important;
-            max-width: 70% !important;
+            max-height: 15vh !important;
+            max-width: 60% !important;
             width: auto !important;
             object-fit: contain !important;
             margin: 0 auto !important;
@@ -68,18 +68,18 @@ st.markdown("""
         /* Text styles */
         .text-content {
             text-align: center !important;
-            width: 100% !important;
+            width: 90% !important;
             margin: 0 auto !important;
             display: flex !important;
             flex-direction: column !important;
             align-items: center !important;
-            gap: 0.3rem !important;
-            padding: 0 1rem !important;
+            gap: 0.2rem !important;
+            padding: 0 0.5rem !important;
         }
         
         .text-content h3 {
             margin: 0 !important;
-            font-size: 1.8rem !important;
+            font-size: 1.6rem !important;
             text-align: center !important;
             width: 100% !important;
         }
@@ -94,28 +94,28 @@ st.markdown("""
         .button-container {
             display: flex !important;
             justify-content: center !important;
-            gap: 1rem !important;
-            margin-top: 0.3rem !important;
-            width: 100% !important;
+            gap: 0.8rem !important;
+            margin-top: 0.2rem !important;
+            width: 90% !important;
         }
         
         /* Audio player */
         .stAudio {
-            width: 70% !important;
-            max-width: 200px !important;
+            width: 60% !important;
+            max-width: 180px !important;
             margin: 0.2rem auto !important;
         }
         
         .stAudio > audio {
             width: 100% !important;
-            height: 32px !important;
+            height: 30px !important;
             margin: 0 auto !important;
         }
         
         /* Streamlit elements adjustment */
         .stButton > button {
-            padding: 0.3rem 1rem !important;
-            min-width: 90px !important;
+            padding: 0.2rem 0.8rem !important;
+            min-width: 80px !important;
             margin: 0 auto !important;
         }
         
@@ -124,6 +124,23 @@ st.markdown("""
             display: flex !important;
             justify-content: center !important;
             align-items: center !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        /* Additional centering for all elements */
+        .element-container {
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            width: 100% !important;
+        }
+
+        .stMarkdown {
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            width: 100% !important;
         }
     </style>
 """, unsafe_allow_html=True)
