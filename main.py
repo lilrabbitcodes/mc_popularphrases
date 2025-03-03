@@ -24,12 +24,12 @@ st.markdown("""
         .main .block-container {
             padding: 0 !important;
             max-width: 100% !important;
-            margin: 0 auto !important;
+            margin: 0 !important;
             display: flex !important;
             justify-content: center !important;
             align-items: flex-start !important;
             min-height: 100vh !important;
-            padding-top: 1rem !important;
+            padding-top: 0 !important;
         }
         
         /* Flashcard container */
@@ -38,14 +38,13 @@ st.markdown("""
             flex-direction: column !important;
             align-items: center !important;
             justify-content: flex-start !important;
-            gap: 0.5rem !important;
-            height: 85vh !important;
+            gap: 0.3rem !important;
             width: 100% !important;
             max-width: 500px !important;
             margin: 0 auto !important;
-            padding: 0.5rem !important;
+            padding: 0.3rem !important;
             position: relative !important;
-            top: -1rem !important;
+            top: 0 !important;
         }
         
         /* Image container */
@@ -55,8 +54,8 @@ st.markdown("""
             display: flex !important;
             justify-content: center !important;
             align-items: center !important;
-            margin-bottom: 0.3rem !important;
-            margin-top: -0.5rem !important;
+            margin: 0 !important;
+            padding: 0 !important;
         }
         
         .image-container img {
