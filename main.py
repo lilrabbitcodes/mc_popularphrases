@@ -22,8 +22,13 @@ st.markdown("""
         
         /* Main container */
         .main .block-container {
-            padding: 1rem !important;
+            padding: 0 !important;
             max-width: 100% !important;
+            margin: 0 auto !important;
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            min-height: 100vh !important;
         }
         
         /* Flashcard container */
@@ -33,22 +38,27 @@ st.markdown("""
             align-items: center !important;
             justify-content: center !important;
             gap: 0.5rem !important;
-            height: 95vh !important;
-            padding: 0.5rem !important;
+            height: 90vh !important;
+            width: 100% !important;
+            max-width: 600px !important;
+            margin: 0 auto !important;
+            padding: 1rem !important;
+            position: relative !important;
+            top: -2rem !important;
         }
         
         /* Image container */
         .image-container {
             width: 100% !important;
-            max-height: 35vh !important;
+            max-height: 30vh !important;
             display: flex !important;
             justify-content: center !important;
             align-items: center !important;
-            margin-bottom: 0.5rem !important;
+            margin-bottom: 0.3rem !important;
         }
         
         .image-container img {
-            max-height: 35vh !important;
+            max-height: 30vh !important;
             width: auto !important;
             object-fit: contain !important;
         }
@@ -57,7 +67,20 @@ st.markdown("""
         .text-content {
             text-align: center !important;
             width: 100% !important;
-            margin: 0.2rem 0 !important;
+            margin: 0 !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            gap: 0.3rem !important;
+        }
+        
+        .text-content h3 {
+            margin: 0 !important;
+            font-size: 2rem !important;
+        }
+        
+        .text-content p {
+            margin: 0 !important;
         }
         
         /* Button container */
@@ -65,19 +88,30 @@ st.markdown("""
             display: flex !important;
             justify-content: center !important;
             gap: 1rem !important;
-            margin-top: 0.5rem !important;
+            margin-top: 0.3rem !important;
+            width: 100% !important;
         }
         
         /* Audio player */
         .stAudio {
             width: 80% !important;
-            max-width: 300px !important;
+            max-width: 250px !important;
             margin: 0.2rem auto !important;
         }
         
         .stAudio > audio {
             width: 100% !important;
             height: 32px !important;
+        }
+        
+        /* Streamlit elements adjustment */
+        .stButton > button {
+            padding: 0.3rem 1rem !important;
+            min-width: 100px !important;
+        }
+        
+        div[data-testid="column"] {
+            text-align: center !important;
         }
     </style>
 """, unsafe_allow_html=True)
