@@ -11,7 +11,7 @@ import requests
 # Must be the first Streamlit command
 st.set_page_config(page_title="Chinese Meme Flashcards", layout="centered")
 
-# Hide Streamlit elements and make static
+# Hide Streamlit elements and add custom CSS
 st.markdown("""
     <style>
         /* Hide Streamlit elements */
@@ -19,37 +19,11 @@ st.markdown("""
         #MainMenu {display: none !important;}
         header {display: none !important;}
         .stDeployButton {display: none !important;}
-        .viewerBadge_container__1QSob {display: none !important;}
-        .viewerBadge_link__1QSob {display: none !important;}
-        button[title="View fullscreen"] {display: none !important;}
         
-        /* Base styles */
-        body {
-            margin: 0 !important;
-            padding: 0 !important;
-            overflow: hidden !important;
-            position: fixed !important;
-            width: 100% !important;
-            height: 100% !important;
-        }
-        
-        .stApp {
-            margin: 0 !important;
-            padding: 0 !important;
-            height: 100vh !important;
-            max-height: 100vh !important;
-            overflow: hidden !important;
-        }
-        
+        /* Main container */
         .main .block-container {
-            margin: 0 !important;
-            padding: 0 !important;
-            max-width: none !important;
-            display: flex !important;
-            justify-content: center !important;
-            align-items: flex-start !important;
-            height: 100vh !important;
-            overflow: hidden !important;
+            padding: 1rem !important;
+            max-width: 100% !important;
         }
         
         /* Flashcard container */
@@ -57,114 +31,53 @@ st.markdown("""
             display: flex !important;
             flex-direction: column !important;
             align-items: center !important;
-            justify-content: flex-start !important;
+            justify-content: center !important;
+            gap: 0.5rem !important;
+            height: 95vh !important;
             padding: 0.5rem !important;
-            margin: 0 auto !important;
-            max-width: 600px !important;
-            width: 100% !important;
-            height: 100vh !important;
-            box-sizing: border-box !important;
-            gap: 0.3rem !important;
         }
         
         /* Image container */
         .image-container {
             width: 100% !important;
-            height: 30vh !important;
+            max-height: 35vh !important;
             display: flex !important;
             justify-content: center !important;
             align-items: center !important;
-            margin: 0 !important;
-            padding: 0 !important;
+            margin-bottom: 0.5rem !important;
         }
         
         .image-container img {
-            max-height: 100% !important;
+            max-height: 35vh !important;
             width: auto !important;
             object-fit: contain !important;
         }
         
-        /* Content wrapper */
-        .content-wrapper {
-            display: flex !important;
-            flex-direction: column !important;
-            align-items: center !important;
-            justify-content: flex-start !important;
-            width: 100% !important;
-            padding: 0 !important;
-            gap: 0.3rem !important;
-            margin-top: -0.5rem !important;
-        }
-        
-        /* Text container */
-        .text-container {
-            display: flex !important;
-            flex-direction: column !important;
-            align-items: center !important;
-            justify-content: flex-start !important;
-            width: 100% !important;
-            gap: 0.3rem !important;
-        }
-        
         /* Text styles */
-        .chinese-text {
-            font-size: 2rem !important;
-            font-weight: bold !important;
-            margin: 0 !important;
+        .text-content {
             text-align: center !important;
             width: 100% !important;
-            line-height: 1.2 !important;
+            margin: 0.2rem 0 !important;
         }
         
-        .pinyin-text {
-            font-size: 1.2rem !important;
-            color: #666 !important;
-            margin: 0 !important;
-            text-align: center !important;
-            width: 100% !important;
-            line-height: 1.2 !important;
-        }
-        
-        .english-text {
-            font-size: 1rem !important;
-            margin: 0 !important;
-            text-align: center !important;
-            width: 100% !important;
-            line-height: 1.2 !important;
-            color: #333 !important;
-        }
-        
-        /* Audio styles */
-        .stAudio {
+        /* Button container */
+        .button-container {
             display: flex !important;
             justify-content: center !important;
-            margin: 0.2rem auto !important;
+            gap: 1rem !important;
+            margin-top: 0.5rem !important;
+        }
+        
+        /* Audio player */
+        .stAudio {
             width: 80% !important;
             max-width: 300px !important;
+            margin: 0.2rem auto !important;
         }
         
         .stAudio > audio {
             width: 100% !important;
             height: 32px !important;
-            border-radius: 16px !important;
-        }
-        
-        /* Button styles */
-        .stButton {
-            display: flex !important;
-            justify-content: center !important;
-            width: 100% !important;
-            margin: 0.5rem 0 !important;
-        }
-        
-        .stButton > button {
-            padding: 0.5rem 1.5rem !important;
-            font-size: 1rem !important;
-            border-radius: 20px !important;
-            background-color: #f0f2f6 !important;
-            border: none !important;
-            width: auto !important;
-            min-width: 120px !important;
         }
     </style>
 """, unsafe_allow_html=True)
@@ -468,34 +381,47 @@ def main():
     # Get current flashcard
     current_card = flashcards[st.session_state.index]
     
-    # Create container for flashcard
-    container = st.container()
+    # Create flashcard container
+    st.markdown('<div class="flashcard-container">', unsafe_allow_html=True)
     
-    with container:
-        # Image
-        st.image(current_card['meme_url'], use_column_width=True)
-        
-        # Chinese text
-        st.markdown(f"### {current_card['chinese']}")
-        
-        # Pinyin
-        st.markdown(f"*{current_card['pinyin']}*")
-        
-        # Audio
-        try:
-            audio_bytes = get_audio_url(current_card["chinese"])
-            if audio_bytes:
-                st.audio(audio_bytes, format='audio/mp3')
-        except Exception as e:
-            st.error("Audio not available")
-        
-        # English definition
-        st.markdown(f"**{current_card['english']}**")
-        
-        # Next button
-        if st.button("Next Card"):
+    # Image
+    st.markdown('<div class="image-container">', unsafe_allow_html=True)
+    st.image(current_card['meme_url'], use_column_width=True)
+    st.markdown('</div>', unsafe_allow_html=True)
+    
+    # Text content
+    st.markdown('<div class="text-content">', unsafe_allow_html=True)
+    st.markdown(f"### {current_card['chinese']}")
+    st.markdown(f"*{current_card['pinyin']}*")
+    
+    # Audio
+    try:
+        audio_bytes = get_audio_url(current_card["chinese"])
+        if audio_bytes:
+            st.audio(audio_bytes, format='audio/mp3')
+    except Exception as e:
+        st.error("Audio not available")
+    
+    # English definition
+    st.markdown(f"**{current_card['english']}**")
+    st.markdown('</div>', unsafe_allow_html=True)
+    
+    # Navigation buttons
+    st.markdown('<div class="button-container">', unsafe_allow_html=True)
+    col1, col2 = st.columns([1, 1])
+    
+    with col1:
+        if st.button("← Back"):
+            st.session_state.index = (st.session_state.index - 1) % len(flashcards)
+            st.rerun()
+    
+    with col2:
+        if st.button("Next →"):
             st.session_state.index = (st.session_state.index + 1) % len(flashcards)
             st.rerun()
+    
+    st.markdown('</div>', unsafe_allow_html=True)
+    st.markdown('</div>', unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main()
