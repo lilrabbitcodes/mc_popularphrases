@@ -490,153 +490,87 @@ def main():
     # Get current flashcard
     current_card = flashcards[st.session_state.index]
     
-    # Container for centering with mobile optimization
+    # Basic styling
     st.markdown("""
         <style>
-            /* Base container */
-            .centered-content {
-                display: flex !important;
-                flex-direction: column !important;
-                align-items: center !important;
-                justify-content: space-between !important;
-                height: 100vh !important;
-                max-height: 100vh !important;
-                padding: 10px !important;
-                margin: 0 auto !important;
-                box-sizing: border-box !important;
-                overflow: hidden !important;
+            /* Hide Streamlit elements */
+            footer {display: none !important;}
+            #MainMenu {display: none !important;}
+            header {display: none !important;}
+            
+            /* Container styles */
+            .flashcard-container {
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 10px;
+                text-align: center;
             }
             
-            /* Image container */
+            /* Image styles */
             .image-container {
-                width: 100% !important;
-                max-width: 300px !important;
-                height: 35vh !important;
-                display: flex !important;
-                align-items: center !important;
-                justify-content: center !important;
-                margin: 0 auto !important;
+                margin: 10px auto;
+                max-width: 300px;
             }
             
             .image-container img {
-                max-height: 100% !important;
-                width: auto !important;
-                object-fit: contain !important;
+                max-width: 100%;
+                height: auto;
             }
             
-            /* Text content */
-            .text-content {
-                display: flex !important;
-                flex-direction: column !important;
-                align-items: center !important;
-                gap: 5px !important;
-                margin: 10px 0 !important;
-            }
-            
+            /* Text styles */
             .chinese-text {
-                font-size: 32px !important;
-                font-weight: bold !important;
-                line-height: 1.2 !important;
-                margin: 5px 0 !important;
+                font-size: 32px;
+                font-weight: bold;
+                margin: 10px 0;
             }
             
             .pinyin-text {
-                font-size: 20px !important;
-                color: #666 !important;
-                line-height: 1.2 !important;
-                margin: 2px 0 !important;
+                font-size: 20px;
+                color: #666;
+                margin: 5px 0;
             }
             
             .english-text {
-                font-size: 18px !important;
-                line-height: 1.2 !important;
-                margin: 5px 0 !important;
-                padding: 0 10px !important;
+                font-size: 18px;
+                margin: 10px 0;
             }
             
-            /* Audio styling */
+            /* Audio styles */
             .stAudio {
-                margin: 5px auto !important;
-                width: 40px !important;
+                margin: 10px auto;
+                width: 40px;
             }
             
             .stAudio > audio {
-                width: 40px !important;
-                height: 40px !important;
-                border-radius: 50% !important;
-                background-color: #666666 !important;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
             }
             
-            audio::-webkit-media-controls-panel {
-                background-color: #666666 !important;
-                justify-content: center !important;
-            }
-            
-            audio::-webkit-media-controls-play-button {
-                transform: scale(1.5) !important;
-                margin: 0 !important;
-            }
-            
-            audio::-webkit-media-controls-timeline,
-            audio::-webkit-media-controls-current-time-display,
-            audio::-webkit-media-controls-time-remaining-display,
-            audio::-webkit-media-controls-volume-slider,
-            audio::-webkit-media-controls-mute-button {
-                display: none !important;
-            }
-            
-            /* Button container */
-            .button-container {
-                width: 100% !important;
-                display: flex !important;
-                justify-content: center !important;
-                padding: 10px 0 !important;
-                margin-top: auto !important;
-            }
-            
+            /* Button styles */
             .stButton > button {
-                padding: 8px 24px !important;
-                font-size: 16px !important;
-                border-radius: 20px !important;
-                background-color: #f0f2f6 !important;
-                border: none !important;
-                transition: background-color 0.3s !important;
-                margin: 0 !important;
-            }
-            
-            /* Hide Streamlit elements */
-            .stApp > header {
-                display: none !important;
-            }
-            
-            .main .block-container {
-                padding: 0 !important;
-                max-width: none !important;
-            }
-            
-            /* Prevent scrolling */
-            .main {
-                overflow: hidden !important;
-            }
-            
-            /* Error messages */
-            .stAlert {
-                padding: 0 !important;
-                margin: 0 !important;
+                margin-top: 10px;
+                padding: 8px 24px;
+                font-size: 16px;
+                border-radius: 20px;
+                background-color: #f0f2f6;
+                border: none;
             }
         </style>
     """, unsafe_allow_html=True)
     
-    st.markdown('<div class="centered-content">', unsafe_allow_html=True)
+    # Main container
+    st.markdown('<div class="flashcard-container">', unsafe_allow_html=True)
     
-    # Image container
+    # Image
     st.markdown('<div class="image-container">', unsafe_allow_html=True)
     st.image(current_card['meme_url'], use_column_width=True)
     st.markdown('</div>', unsafe_allow_html=True)
     
-    # Text content
-    st.markdown('<div class="text-content">', unsafe_allow_html=True)
+    # Chinese text
     st.markdown(f'<div class="chinese-text">{current_card["chinese"]}</div>', unsafe_allow_html=True)
+    
+    # Pinyin
     st.markdown(f'<div class="pinyin-text">{current_card["pinyin"]}</div>', unsafe_allow_html=True)
     
     # Audio
@@ -647,15 +581,13 @@ def main():
     except Exception as e:
         st.error("🔇", icon=None)
     
+    # English definition
     st.markdown(f'<div class="english-text">{current_card["english"]}</div>', unsafe_allow_html=True)
-    st.markdown('</div>', unsafe_allow_html=True)
     
-    # Button container
-    st.markdown('<div class="button-container">', unsafe_allow_html=True)
+    # Next button
     if st.button("Next Card"):
         st.session_state.index = (st.session_state.index + 1) % len(flashcards)
         st.rerun()
-    st.markdown('</div>', unsafe_allow_html=True)
     
     st.markdown('</div>', unsafe_allow_html=True)
 
