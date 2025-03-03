@@ -45,28 +45,31 @@ st.markdown("""
             padding: 0.2rem !important;
         }
         
-        /* Image container - Extremely small size */
+        /* Image container - Small but visible */
         .image-container {
             width: 100% !important;
             display: flex !important;
             justify-content: center !important;
             align-items: center !important;
             text-align: center !important;
-            margin: 0.1rem auto !important;
+            margin: 0.3rem auto !important;
             padding: 0 !important;
-            max-height: 8vh !important;
+            max-height: 15vh !important;
+            overflow: visible !important;
         }
         
-        /* Force very small image */
+        /* Force visible image */
         .image-container img {
             display: block !important;
             margin-left: auto !important;
             margin-right: auto !important;
-            max-height: 6vh !important; /* Very small vertical size */
-            max-width: 40% !important; /* Very narrow width */
+            max-height: 12vh !important;
+            max-width: 120px !important;
             width: auto !important;
             height: auto !important;
             object-fit: contain !important;
+            visibility: visible !important;
+            opacity: 1 !important;
         }
         
         /* Text styles */
