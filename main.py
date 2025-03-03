@@ -511,49 +511,52 @@ def main():
                 display: flex !important;
                 flex-direction: column !important;
                 align-items: center !important;
-                justify-content: center !important;
-                padding: 1rem !important;
+                justify-content: space-between !important;
+                padding: 0.5rem !important;
                 margin: 0 auto !important;
                 max-width: 600px !important;
                 text-align: center !important;
+                height: 100vh !important;
+                box-sizing: border-box !important;
             }
             
             /* Image styles */
             .image-container {
                 width: 100% !important;
-                max-width: 300px !important;
+                height: 35vh !important;
                 margin: 0 auto !important;
                 display: flex !important;
                 justify-content: center !important;
                 align-items: center !important;
+                padding: 0.5rem !important;
             }
             
             .image-container img {
                 max-width: 100% !important;
-                height: auto !important;
+                max-height: 100% !important;
                 object-fit: contain !important;
             }
             
             /* Text styles */
             .chinese-text {
-                font-size: 32px !important;
+                font-size: 28px !important;
                 font-weight: bold !important;
-                margin: 10px 0 !important;
-                text-align: center !important;
-                width: 100% !important;
-            }
-            
-            .pinyin-text {
-                font-size: 20px !important;
-                color: #666 !important;
                 margin: 5px 0 !important;
                 text-align: center !important;
                 width: 100% !important;
             }
             
-            .english-text {
+            .pinyin-text {
                 font-size: 18px !important;
-                margin: 10px 0 !important;
+                color: #666 !important;
+                margin: 2px 0 !important;
+                text-align: center !important;
+                width: 100% !important;
+            }
+            
+            .english-text {
+                font-size: 16px !important;
+                margin: 5px 0 !important;
                 text-align: center !important;
                 width: 100% !important;
             }
@@ -562,28 +565,32 @@ def main():
             .stAudio {
                 display: flex !important;
                 justify-content: center !important;
-                margin: 10px auto !important;
-                width: 40px !important;
+                margin: 5px auto !important;
+                width: 200px !important;
             }
             
             .stAudio > audio {
-                width: 40px !important;
+                width: 200px !important;
                 height: 40px !important;
-                border-radius: 50% !important;
-                background-color: #666666 !important;
+                border-radius: 20px !important;
+                background-color: #f0f2f6 !important;
             }
             
             audio::-webkit-media-controls-panel {
-                background-color: #666666 !important;
-                justify-content: center !important;
+                background-color: #f0f2f6 !important;
+                justify-content: flex-start !important;
             }
             
             audio::-webkit-media-controls-play-button {
-                transform: scale(1.5) !important;
-                margin: 0 !important;
+                transform: scale(1.2) !important;
+                margin-right: 10px !important;
             }
             
-            audio::-webkit-media-controls-timeline,
+            audio::-webkit-media-controls-timeline {
+                display: flex !important;
+                margin: 0 10px !important;
+            }
+            
             audio::-webkit-media-controls-current-time-display,
             audio::-webkit-media-controls-time-remaining-display,
             audio::-webkit-media-controls-volume-slider,
@@ -596,10 +603,11 @@ def main():
                 display: flex !important;
                 justify-content: center !important;
                 width: 100% !important;
+                margin-bottom: 10px !important;
             }
             
             .stButton > button {
-                margin-top: 10px !important;
+                margin: 0 !important;
                 padding: 8px 24px !important;
                 font-size: 16px !important;
                 border-radius: 20px !important;
