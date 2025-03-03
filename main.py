@@ -55,6 +55,7 @@ st.markdown("""
             margin: 0 auto !important;
             padding: 0 !important;
             text-align: center !important;
+            overflow: visible !important;
         }
         
         .image-container img {
@@ -64,9 +65,24 @@ st.markdown("""
             object-fit: contain !important;
             margin: 0 auto !important;
             display: block !important;
-            position: relative !important;
-            left: 50% !important;
-            transform: translateX(-50%) !important;
+            position: static !important;
+            left: auto !important;
+            transform: none !important;
+        }
+        
+        /* Mobile-specific adjustments */
+        @media (max-width: 768px) {
+            .image-container {
+                width: 100% !important;
+                display: flex !important;
+                justify-content: center !important;
+                align-items: center !important;
+            }
+            
+            .image-container img {
+                margin-left: auto !important;
+                margin-right: auto !important;
+            }
         }
         
         /* Text styles */
