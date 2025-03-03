@@ -437,9 +437,12 @@ def main():
     try:
         audio_bytes = get_audio_url(current_card["chinese"])
         if audio_bytes:
-            st.audio(audio_bytes, format='audio/mp3')
+            st.audio(audio_bytes, format='audio/mp3', start_time=0)
+        else:
+            st.warning("Audio not available", icon="🔇")
     except Exception as e:
-        st.error("Audio not available")
+        st.warning("Audio not available", icon="🔇")
+        print(f"Audio error: {str(e)}")
     
     # English definition
     st.markdown(f"**{current_card['english']}**")
