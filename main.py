@@ -47,37 +47,42 @@ st.markdown("""
         
         /* Image container */
         .image-container {
-            width: 100vw !important;
-            max-width: 100% !important;
-            height: auto !important;
+            width: 100% !important;
             display: flex !important;
             justify-content: center !important;
             align-items: center !important;
             text-align: center !important;
-            margin: 0 !important;
+            margin: 0 auto !important;
             padding: 0 !important;
-            box-sizing: border-box !important;
+            position: relative !important;
         }
         
+        .image-container > div {
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            width: 100% !important;
+        }
+        
+        /* Center image across all browsers and devices */
         .image-container img {
+            display: block !important;
+            margin: 0 auto !important;
             max-height: 45vh !important;
             width: auto !important;
-            max-width: 450px !important;
-            margin-left: auto !important;
-            margin-right: auto !important;
-            display: block !important;
+            max-width: 100% !important;
             object-fit: contain !important;
+            position: relative !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
         }
         
         /* Mobile-specific adjustments */
         @media (max-width: 768px) {
             .image-container {
-                padding-left: 0 !important;
-                padding-right: 0 !important;
-                box-sizing: border-box !important;
-                position: relative !important;
-                left: 50% !important;
-                transform: translateX(-50%) !important;
+                display: flex !important;
+                justify-content: center !important;
+                align-items: center !important;
                 width: 100% !important;
             }
             
@@ -505,9 +510,8 @@ def main():
         
         # Image
         st.markdown('<div class="image-container">', unsafe_allow_html=True)
-        col_img = st.columns([1,3,1])  # Adjusted column ratio for larger image
-        with col_img[1]:  # Use only the middle column
-            st.image(current_card['meme_url'], width=420)  # Increased from 140 to 420 (3x)
+        # Use a single full-width column for better centering
+        st.image(current_card['meme_url'], width=350)
         st.markdown('</div>', unsafe_allow_html=True)
         
         # Text content
