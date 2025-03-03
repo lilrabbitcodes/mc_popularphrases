@@ -508,15 +508,20 @@ def main():
         # Create flashcard container
         st.markdown('<div class="flashcard-container">', unsafe_allow_html=True)
         
-        # Image with direct inline styles for better centering
-        image_url = current_card['meme_url']
-        st.markdown(f'''
-        <div style="width:100%; display:flex; justify-content:center; align-items:center; margin:0 auto; text-align:center;">
-            <div style="margin:0 auto; text-align:center; width:180px; display:block;">
-                <img src="{image_url}" style="margin:0 auto; display:block; max-width:180px; width:100%;">
-            </div>
-        </div>
-        ''', unsafe_allow_html=True)
+        # Top Next button
+        st.markdown('<div class="button-container top-button">', unsafe_allow_html=True)
+        if st.button("Next →", key="next_top"):
+            st.session_state.index = (st.session_state.index + 1) % len(flashcards)
+            st.rerun()
+        st.markdown('</div>', unsafe_allow_html=True)
+        
+        # Image with extra centering container
+        st.markdown('<div class="image-container" style="text-align:center; display:flex; justify-content:center; width:100%;">', unsafe_allow_html=True)
+        # Center image with additional inline styles
+        st.markdown('<div style="margin:0 auto; text-align:center; width:100%;">', unsafe_allow_html=True)
+        st.image(current_card['meme_url'], width=180)
+        st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
         
         # Text content
         st.markdown('<div class="text-content">', unsafe_allow_html=True)
@@ -543,21 +548,13 @@ def main():
         
         st.markdown('</div>', unsafe_allow_html=True)
         
-        # Navigation buttons
-        st.markdown('<div class="button-container">', unsafe_allow_html=True)
-        col1, col2 = st.columns([1, 1])
-        
-        with col1:
-            if st.button("← Back"):
-                st.session_state.index = (st.session_state.index - 1) % len(flashcards)
-                st.rerun()
-        
-        with col2:
-            if st.button("Next →"):
-                st.session_state.index = (st.session_state.index + 1) % len(flashcards)
-                st.rerun()
-        
+        # Bottom Back button
+        st.markdown('<div class="button-container bottom-button">', unsafe_allow_html=True)
+        if st.button("← Back", key="back_bottom"):
+            st.session_state.index = (st.session_state.index - 1) % len(flashcards)
+            st.rerun()
         st.markdown('</div>', unsafe_allow_html=True)
+        
         st.markdown('</div>', unsafe_allow_html=True)
     
     except Exception as e:
