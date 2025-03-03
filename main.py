@@ -45,51 +45,27 @@ st.markdown("""
             padding: 0.2rem !important;
         }
         
-        /* Image container */
+        /* Image container - Enhanced centering */
         .image-container {
             width: 100% !important;
             display: flex !important;
             justify-content: center !important;
             align-items: center !important;
             text-align: center !important;
-            margin: 0 auto !important;
+            margin: 0.5rem auto !important;
             padding: 0 !important;
-            position: relative !important;
         }
         
-        .image-container > div {
-            display: flex !important;
-            justify-content: center !important;
-            align-items: center !important;
-            width: 100% !important;
-        }
-        
-        /* Center image across all browsers and devices */
+        /* Force image centering */
         .image-container img {
             display: block !important;
-            margin: 0 auto !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
             max-height: 25vh !important;
+            max-width: 100% !important;
             width: auto !important;
-            max-width: 200px !important;
+            height: auto !important;
             object-fit: contain !important;
-            position: relative !important;
-            left: 50% !important;
-            transform: translateX(-50%) !important;
-        }
-        
-        /* Mobile-specific adjustments */
-        @media (max-width: 768px) {
-            .image-container {
-                display: flex !important;
-                justify-content: center !important;
-                align-items: center !important;
-                width: 100% !important;
-            }
-            
-            .image-container img {
-                max-width: 180px !important;
-                max-height: 20vh !important;
-            }
         }
         
         /* Text styles */
