@@ -27,8 +27,9 @@ st.markdown("""
             margin: 0 auto !important;
             display: flex !important;
             justify-content: center !important;
-            align-items: center !important;
+            align-items: flex-start !important;
             min-height: 100vh !important;
+            padding-top: 1rem !important;
         }
         
         /* Flashcard container */
@@ -36,29 +37,31 @@ st.markdown("""
             display: flex !important;
             flex-direction: column !important;
             align-items: center !important;
-            justify-content: center !important;
+            justify-content: flex-start !important;
             gap: 0.5rem !important;
-            height: 90vh !important;
+            height: 85vh !important;
             width: 100% !important;
-            max-width: 600px !important;
+            max-width: 500px !important;
             margin: 0 auto !important;
-            padding: 1rem !important;
+            padding: 0.5rem !important;
             position: relative !important;
-            top: -2rem !important;
+            top: -1rem !important;
         }
         
         /* Image container */
         .image-container {
-            width: 100% !important;
-            max-height: 30vh !important;
+            width: 90% !important;
+            max-height: 25vh !important;
             display: flex !important;
             justify-content: center !important;
             align-items: center !important;
             margin-bottom: 0.3rem !important;
+            margin-top: -0.5rem !important;
         }
         
         .image-container img {
-            max-height: 30vh !important;
+            max-height: 25vh !important;
+            max-width: 80% !important;
             width: auto !important;
             object-fit: contain !important;
         }
