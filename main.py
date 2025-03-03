@@ -20,39 +20,41 @@ st.markdown("""
         header {display: none !important;}
         .stDeployButton {display: none !important;}
         
-        /* Main container */
+        /* Main container - shifted up */
         .main .block-container {
             padding: 0 !important;
             max-width: 100% !important;
             margin: 0 !important;
             display: flex !important;
             justify-content: center !important;
-            align-items: flex-start !important;
+            align-items: flex-start !important; /* Align to the top */
             min-height: 100vh !important;
             padding-top: 0 !important;
+            margin-top: -20px !important; /* Shift everything up */
         }
         
-        /* Flashcard container */
+        /* Flashcard container - reduced vertical spacing */
         .flashcard-container {
             display: flex !important;
             flex-direction: column !important;
             align-items: center !important;
             justify-content: flex-start !important;
-            gap: 0.2rem !important;
+            gap: 0.15rem !important; /* Reduced gap */
             width: 100% !important;
             max-width: 350px !important;
             margin: 0 auto !important;
-            padding: 0.2rem !important;
+            padding: 0.1rem !important; /* Reduced padding */
+            margin-top: -10px !important; /* Additional shift up */
         }
         
-        /* Image container with strong centering */
+        /* Image container - reduced margin */
         .image-container {
             width: 100% !important; 
             display: flex !important;
             justify-content: center !important;
             align-items: center !important;
             text-align: center !important;
-            margin: 10px auto !important;
+            margin: 5px auto !important; /* Reduced margin from 10px to 5px */
             padding: 0 !important;
             min-height: 160px !important;
             position: relative !important;
