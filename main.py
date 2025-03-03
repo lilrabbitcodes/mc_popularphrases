@@ -47,41 +47,38 @@ st.markdown("""
         
         /* Image container */
         .image-container {
-            width: 100% !important;
-            max-height: 8vh !important;
+            width: 100vw !important;
+            max-width: 100% !important;
+            height: auto !important;
             display: flex !important;
             justify-content: center !important;
             align-items: center !important;
-            margin: 0 auto !important;
-            padding: 0 !important;
             text-align: center !important;
-            overflow: visible !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            box-sizing: border-box !important;
         }
         
         .image-container img {
-            max-height: 8vh !important;
-            max-width: 40% !important;
+            max-height: 10vh !important;
             width: auto !important;
-            object-fit: contain !important;
-            margin: 0 auto !important;
+            max-width: 100px !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
             display: block !important;
-            position: static !important;
-            left: auto !important;
-            transform: none !important;
+            object-fit: contain !important;
         }
         
         /* Mobile-specific adjustments */
         @media (max-width: 768px) {
             .image-container {
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+                box-sizing: border-box !important;
+                position: relative !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
                 width: 100% !important;
-                display: flex !important;
-                justify-content: center !important;
-                align-items: center !important;
-            }
-            
-            .image-container img {
-                margin-left: auto !important;
-                margin-right: auto !important;
             }
         }
         
@@ -503,7 +500,9 @@ def main():
         
         # Image
         st.markdown('<div class="image-container">', unsafe_allow_html=True)
-        st.image(current_card['meme_url'], width=150)
+        col_img = st.columns([1,2,1])  # Create 3 columns with middle one being larger
+        with col_img[1]:  # Use only the middle column
+            st.image(current_card['meme_url'], width=100)  # Set fixed width
         st.markdown('</div>', unsafe_allow_html=True)
         
         # Text content
