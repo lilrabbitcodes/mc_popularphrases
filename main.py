@@ -23,87 +23,7 @@ st.markdown("""
         .viewerBadge_link__1QSob {display: none !important;}
         button[title="View fullscreen"] {display: none !important;}
         
-        /* Make app static */
-        .stApp {
-            height: 100vh !important;
-            overflow: hidden !important;
-            position: fixed !important;
-            width: 100% !important;
-        }
-        
-        .main .block-container {
-            height: 100vh !important;
-            overflow: hidden !important;
-            padding: 1rem !important;
-        }
-        
-        /* Main container */
-        .main-container {
-            display: flex !important;
-            flex-direction: column !important;
-            align-items: center !important;
-            gap: 10px !important;
-            height: calc(100vh - 2rem) !important;
-            overflow: hidden !important;
-            position: fixed !important;
-            width: calc(100% - 2rem) !important;
-        }
-        
-        /* Image sizing */
-        .element-container img {
-            max-height: 35vh !important;
-            width: auto !important;
-            object-fit: contain !important;
-            margin: 0 auto !important;
-        }
-        
-        /* Content spacing */
-        .character {
-            font-size: 42px !important;
-            font-weight: bold !important;
-            margin: 5px 0 !important;
-            text-align: center !important;
-        }
-        
-        .pinyin {
-            font-size: 20px !important;
-            color: #666 !important;
-            margin: 5px 0 !important;
-            text-align: center !important;
-        }
-        
-        .explanation {
-            font-size: 18px !important;
-            font-weight: 500 !important;
-            margin: 5px 0 10px 0 !important;
-            text-align: center !important;
-            padding: 0 15px !important;
-        }
-        
-        /* Audio player */
-        div.stAudio {
-            display: flex !important;
-            justify-content: center !important;
-            margin: 5px auto !important;
-        }
-        
-        div.stAudio > audio {
-            width: 100px !important;
-            height: 35px !important;
-        }
-        
-        /* Button styling */
-        .stButton {
-            display: flex !important;
-            justify-content: center !important;
-            margin: 10px auto !important;
-        }
-        
-        .stButton button {
-            width: 120px !important;
-        }
-        
-        /* Prevent scrolling */
+        /* Make app static and prevent scrolling */
         body {
             overflow: hidden !important;
             position: fixed !important;
@@ -111,16 +31,101 @@ st.markdown("""
             height: 100% !important;
         }
         
-        /* Audio container styling */
-        .audio-container {
+        .stApp {
+            height: 100vh !important;
+            overflow: hidden !important;
+            position: fixed !important;
+            width: 100% !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        
+        .main .block-container {
+            padding: 0 !important;
+            margin: 0 !important;
+            max-width: 100% !important;
+        }
+        
+        /* Main container */
+        .main-container {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            height: 100vh !important;
+            padding: 10px !important;
+            box-sizing: border-box !important;
+        }
+        
+        /* Image container */
+        .image-container {
+            width: 100% !important;
             display: flex !important;
             justify-content: center !important;
             align-items: center !important;
-            width: 100% !important;
-            margin: 15px auto !important;
+            flex: 0 0 auto !important;
+            max-height: 35vh !important;
+            margin-bottom: 10px !important;
         }
         
-        .audio-container audio {
+        .element-container img {
+            max-height: 30vh !important;
+            width: auto !important;
+            object-fit: contain !important;
+            margin: 0 auto !important;
+        }
+        
+        /* Text content */
+        .text-content {
+            width: 100% !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            gap: 5px !important;
+            flex: 0 0 auto !important;
+        }
+        
+        .character {
+            font-size: 32px !important;
+            font-weight: bold !important;
+            margin: 2px 0 !important;
+            text-align: center !important;
+            line-height: 1.2 !important;
+        }
+        
+        .pinyin {
+            font-size: 18px !important;
+            color: #666 !important;
+            margin: 2px 0 !important;
+            text-align: center !important;
+            line-height: 1.2 !important;
+        }
+        
+        .explanation {
+            font-size: 16px !important;
+            font-weight: 500 !important;
+            margin: 2px 0 !important;
+            text-align: center !important;
+            padding: 0 10px !important;
+            line-height: 1.2 !important;
+        }
+        
+        /* Audio player */
+        .audio-container {
+            width: 100% !important;
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            margin: 5px auto !important;
+            flex: 0 0 auto !important;
+        }
+        
+        div.stAudio {
+            margin: 0 auto !important;
+            width: auto !important;
+        }
+        
+        div.stAudio > audio {
             width: 35px !important;
             height: 35px !important;
             border-radius: 50% !important;
@@ -128,61 +133,52 @@ st.markdown("""
         }
         
         /* Hide audio controls except play button */
-        .audio-container audio::-webkit-media-controls-panel {
+        audio::-webkit-media-controls-panel {
             background-color: #666666 !important;
             display: flex !important;
             justify-content: center !important;
         }
         
-        .audio-container audio::-webkit-media-controls-play-button {
+        audio::-webkit-media-controls-play-button {
             transform: scale(1.2) !important;
             margin: 0 !important;
         }
         
-        .audio-container audio::-webkit-media-controls-timeline,
-        .audio-container audio::-webkit-media-controls-current-time-display,
-        .audio-container audio::-webkit-media-controls-time-remaining-display,
-        .audio-container audio::-webkit-media-controls-volume-slider,
-        .audio-container audio::-webkit-media-controls-mute-button {
+        audio::-webkit-media-controls-timeline,
+        audio::-webkit-media-controls-current-time-display,
+        audio::-webkit-media-controls-time-remaining-display,
+        audio::-webkit-media-controls-volume-slider,
+        audio::-webkit-media-controls-mute-button {
             display: none !important;
         }
         
-        /* Center all content */
-        .main-container {
-            max-height: 100vh !important;
-            display: flex !important;
-            flex-direction: column !important;
-            align-items: center !important;
-            justify-content: center !important;
-            padding: 10px !important;
-            text-align: center !important;
-        }
-        
-        .text-content {
-            width: 100% !important;
-            display: flex !important;
-            flex-direction: column !important;
-            align-items: center !important;
-            margin: 10px 0 !important;
-        }
-        
-        .character, .pinyin, .explanation {
-            width: 100% !important;
-            text-align: center !important;
-        }
-        
-        .image-container {
-            width: 100% !important;
-            display: flex !important;
-            justify-content: center !important;
-            margin-bottom: 15px !important;
-        }
-        
+        /* Button styling */
         .button-container {
             width: 100% !important;
             display: flex !important;
             justify-content: center !important;
-            margin-top: 15px !important;
+            margin-top: 10px !important;
+            flex: 0 0 auto !important;
+        }
+        
+        .stButton {
+            margin: 0 auto !important;
+        }
+        
+        .stButton > button {
+            background-color: white !important;
+            color: black !important;
+            border: 2px solid black !important;
+            border-radius: 5px !important;
+            padding: 5px 15px !important;
+            font-weight: 500 !important;
+            width: 120px !important;
+        }
+        
+        /* Warning and error messages */
+        .stAlert {
+            padding: 2px !important;
+            margin: 2px 0 !important;
         }
     </style>
 """, unsafe_allow_html=True)
@@ -495,12 +491,16 @@ def main():
         # Main container
         st.markdown("""
             <div class="main-container">
+                <div class="content-wrapper">
         """, unsafe_allow_html=True)
         
-        # Image with centering
-        col1, col2, col3 = st.columns([1,6,1])
-        with col2:
-            st.image(current_card['meme_url'], use_column_width=False)
+        # Image container
+        st.markdown('<div class="image-container">', unsafe_allow_html=True)
+        st.image(current_card['meme_url'], use_column_width=False)
+        st.markdown('</div>', unsafe_allow_html=True)
+        
+        # Text content wrapper
+        st.markdown('<div class="text-content">', unsafe_allow_html=True)
         
         # Chinese character
         st.markdown(f"""
@@ -516,33 +516,32 @@ def main():
         try:
             audio_bytes = get_audio_url(current_card["chinese"])
             if audio_bytes:
-                st.markdown("""
-                    <div class="audio-container">
-                """, unsafe_allow_html=True)
+                st.markdown('<div class="audio-container">', unsafe_allow_html=True)
                 st.audio(audio_bytes, format='audio/mp3')
-                st.markdown("</div>", unsafe_allow_html=True)
-            else:
-                st.warning("Audio not available for this phrase", icon="⚠️")
+                st.markdown('</div>', unsafe_allow_html=True)
         except Exception as e:
-            st.error(f"Error playing audio: {str(e)}", icon="🚨")
+            st.error("🔇", icon=None)
         
         # English definition
         st.markdown(f"""
             <div class="explanation">{current_card['english']}</div>
         """, unsafe_allow_html=True)
         
-        # Next button below definition
+        st.markdown('</div>', unsafe_allow_html=True)  # Close text-content
+        
+        # Button container
+        st.markdown('<div class="button-container">', unsafe_allow_html=True)
         if st.button("Next Card"):
             st.session_state.index = (st.session_state.index + 1) % len(flashcards)
             st.rerun()
+        st.markdown('</div>', unsafe_allow_html=True)
         
         # Close main container
         st.markdown("</div>", unsafe_allow_html=True)
 
-    # Add this at the start of main()
+    # Prevent scrolling
     st.markdown("""
         <script>
-            // Prevent scrolling
             document.body.style.overflow = 'hidden';
             document.body.style.position = 'fixed';
             document.addEventListener('touchmove', function(e) {
