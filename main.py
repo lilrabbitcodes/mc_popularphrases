@@ -508,11 +508,15 @@ def main():
         # Create flashcard container
         st.markdown('<div class="flashcard-container">', unsafe_allow_html=True)
         
-        # Image
-        st.markdown('<div class="image-container">', unsafe_allow_html=True)
-        # Use a single full-width column for better centering
-        st.image(current_card['meme_url'], width=350)
-        st.markdown('</div>', unsafe_allow_html=True)
+        # Image with direct inline styles for better centering
+        image_url = current_card['meme_url']
+        st.markdown(f'''
+        <div style="width:100%; display:flex; justify-content:center; align-items:center; margin:0 auto; text-align:center;">
+            <div style="margin:0 auto; text-align:center; width:180px; display:block;">
+                <img src="{image_url}" style="margin:0 auto; display:block; max-width:180px; width:100%;">
+            </div>
+        </div>
+        ''', unsafe_allow_html=True)
         
         # Text content
         st.markdown('<div class="text-content">', unsafe_allow_html=True)
