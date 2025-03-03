@@ -490,12 +490,154 @@ def main():
     # Get current flashcard
     current_card = flashcards[st.session_state.index]
     
-    # Display image
-    st.image(current_card['meme_url'], use_column_width=True)
+    # Container for centering with mobile optimization
+    st.markdown("""
+        <style>
+            /* Base container */
+            .centered-content {
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                justify-content: space-between !important;
+                height: 100vh !important;
+                max-height: 100vh !important;
+                padding: 10px !important;
+                margin: 0 auto !important;
+                box-sizing: border-box !important;
+                overflow: hidden !important;
+            }
+            
+            /* Image container */
+            .image-container {
+                width: 100% !important;
+                max-width: 300px !important;
+                height: 35vh !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                margin: 0 auto !important;
+            }
+            
+            .image-container img {
+                max-height: 100% !important;
+                width: auto !important;
+                object-fit: contain !important;
+            }
+            
+            /* Text content */
+            .text-content {
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                gap: 5px !important;
+                margin: 10px 0 !important;
+            }
+            
+            .chinese-text {
+                font-size: 32px !important;
+                font-weight: bold !important;
+                line-height: 1.2 !important;
+                margin: 5px 0 !important;
+            }
+            
+            .pinyin-text {
+                font-size: 20px !important;
+                color: #666 !important;
+                line-height: 1.2 !important;
+                margin: 2px 0 !important;
+            }
+            
+            .english-text {
+                font-size: 18px !important;
+                line-height: 1.2 !important;
+                margin: 5px 0 !important;
+                padding: 0 10px !important;
+            }
+            
+            /* Audio styling */
+            .stAudio {
+                margin: 5px auto !important;
+                width: 40px !important;
+            }
+            
+            .stAudio > audio {
+                width: 40px !important;
+                height: 40px !important;
+                border-radius: 50% !important;
+                background-color: #666666 !important;
+            }
+            
+            audio::-webkit-media-controls-panel {
+                background-color: #666666 !important;
+                justify-content: center !important;
+            }
+            
+            audio::-webkit-media-controls-play-button {
+                transform: scale(1.5) !important;
+                margin: 0 !important;
+            }
+            
+            audio::-webkit-media-controls-timeline,
+            audio::-webkit-media-controls-current-time-display,
+            audio::-webkit-media-controls-time-remaining-display,
+            audio::-webkit-media-controls-volume-slider,
+            audio::-webkit-media-controls-mute-button {
+                display: none !important;
+            }
+            
+            /* Button container */
+            .button-container {
+                width: 100% !important;
+                display: flex !important;
+                justify-content: center !important;
+                padding: 10px 0 !important;
+                margin-top: auto !important;
+            }
+            
+            .stButton > button {
+                padding: 8px 24px !important;
+                font-size: 16px !important;
+                border-radius: 20px !important;
+                background-color: #f0f2f6 !important;
+                border: none !important;
+                transition: background-color 0.3s !important;
+                margin: 0 !important;
+            }
+            
+            /* Hide Streamlit elements */
+            .stApp > header {
+                display: none !important;
+            }
+            
+            .main .block-container {
+                padding: 0 !important;
+                max-width: none !important;
+            }
+            
+            /* Prevent scrolling */
+            .main {
+                overflow: hidden !important;
+            }
+            
+            /* Error messages */
+            .stAlert {
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+        </style>
+    """, unsafe_allow_html=True)
     
-    # Display text content
-    st.write(f"## {current_card['chinese']}")
-    st.write(f"### {current_card['pinyin']}")
+    st.markdown('<div class="centered-content">', unsafe_allow_html=True)
+    
+    # Image container
+    st.markdown('<div class="image-container">', unsafe_allow_html=True)
+    st.image(current_card['meme_url'], use_column_width=True)
+    st.markdown('</div>', unsafe_allow_html=True)
+    
+    # Text content
+    st.markdown('<div class="text-content">', unsafe_allow_html=True)
+    st.markdown(f'<div class="chinese-text">{current_card["chinese"]}</div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="pinyin-text">{current_card["pinyin"]}</div>', unsafe_allow_html=True)
     
     # Audio
     try:
@@ -505,13 +647,17 @@ def main():
     except Exception as e:
         st.error("🔇", icon=None)
     
-    # English definition
-    st.write(f"### {current_card['english']}")
+    st.markdown(f'<div class="english-text">{current_card["english"]}</div>', unsafe_allow_html=True)
+    st.markdown('</div>', unsafe_allow_html=True)
     
-    # Next button
+    # Button container
+    st.markdown('<div class="button-container">', unsafe_allow_html=True)
     if st.button("Next Card"):
         st.session_state.index = (st.session_state.index + 1) % len(flashcards)
         st.rerun()
+    st.markdown('</div>', unsafe_allow_html=True)
+    
+    st.markdown('</div>', unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main()
