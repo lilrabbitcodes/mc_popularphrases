@@ -52,8 +52,9 @@ st.markdown("""
             justify-content: center !important;
             align-items: center !important;
             text-align: center !important;
-            margin: 0.5rem auto !important;
+            margin: 0.3rem auto !important;
             padding: 0 !important;
+            max-height: 20vh !important;
         }
         
         /* Force image centering */
@@ -61,8 +62,8 @@ st.markdown("""
             display: block !important;
             margin-left: auto !important;
             margin-right: auto !important;
-            max-height: 25vh !important;
-            max-width: 100% !important;
+            max-height: 18vh !important;
+            max-width: 80% !important;
             width: auto !important;
             height: auto !important;
             object-fit: contain !important;
@@ -529,7 +530,7 @@ def main():
         st.markdown('<div class="image-container">', unsafe_allow_html=True)
         col1, col2, col3 = st.columns([1, 2, 1])
         with col2:  # Use only the middle column
-            st.image(current_card['meme_url'], width=160, use_column_width=True)
+            st.image(current_card['meme_url'], width=120, use_column_width=True)
         st.markdown('</div>', unsafe_allow_html=True)
         
         # Text content
