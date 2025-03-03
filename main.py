@@ -534,6 +534,11 @@ def main():
         # Create flashcard container
         st.markdown('<div class="flashcard-container">', unsafe_allow_html=True)
         
+        # Next button at the top
+        if st.button("Next →", key="next_button"):
+            st.session_state.index = (st.session_state.index + 1) % len(flashcards)
+            st.rerun()
+        
         # Image with extra centering container
         st.markdown('<div class="image-container" style="text-align:center; display:flex; justify-content:center; width:100%;">', unsafe_allow_html=True)
         # Center image with additional inline styles
@@ -567,21 +572,10 @@ def main():
         
         st.markdown('</div>', unsafe_allow_html=True)
         
-        # Navigation buttons at the bottom
-        st.markdown('<div class="button-container">', unsafe_allow_html=True)
-        col1, col2 = st.columns(2)
-        
-        with col1:
-            if st.button("← Previous", key="back_button"):
-                st.session_state.index = (st.session_state.index - 1) % len(flashcards)
-                st.rerun()
-        
-        with col2:
-            if st.button("Next →", key="next_button"):
-                st.session_state.index = (st.session_state.index + 1) % len(flashcards)
-                st.rerun()
-                
-        st.markdown('</div>', unsafe_allow_html=True)
+        # Back button at the bottom
+        if st.button("← Previous", key="back_button"):
+            st.session_state.index = (st.session_state.index - 1) % len(flashcards)
+            st.rerun()
         
         st.markdown('</div>', unsafe_allow_html=True)
     
