@@ -47,8 +47,8 @@ st.markdown("""
         
         /* Image container */
         .image-container {
-            width: 50% !important;
-            max-height: 10vh !important;
+            width: 40% !important;
+            max-height: 8vh !important;
             display: flex !important;
             justify-content: center !important;
             align-items: center !important;
@@ -57,8 +57,8 @@ st.markdown("""
         }
         
         .image-container img {
-            max-height: 10vh !important;
-            max-width: 50% !important;
+            max-height: 8vh !important;
+            max-width: 40% !important;
             width: auto !important;
             object-fit: contain !important;
             margin: 0 auto !important;
@@ -483,7 +483,7 @@ def main():
         
         # Image
         st.markdown('<div class="image-container">', unsafe_allow_html=True)
-        st.image(current_card['meme_url'], use_column_width=True)
+        st.image(current_card['meme_url'], width=150)
         st.markdown('</div>', unsafe_allow_html=True)
         
         # Text content
