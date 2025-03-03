@@ -490,61 +490,28 @@ def main():
     # Get current flashcard
     current_card = flashcards[st.session_state.index]
     
-    # Main container
-    st.markdown('<div class="main-container">', unsafe_allow_html=True)
+    # Display image
+    st.image(current_card['meme_url'], use_column_width=True)
     
-    # Content wrapper
-    st.markdown('<div class="content-wrapper">', unsafe_allow_html=True)
-    
-    # Image
-    st.markdown('<div class="image-container">', unsafe_allow_html=True)
-    st.image(current_card['meme_url'], use_column_width=False)
-    st.markdown('</div>', unsafe_allow_html=True)
-    
-    # Text content
-    st.markdown('<div class="text-content">', unsafe_allow_html=True)
-    
-    # Chinese character
-    st.markdown(f'<div class="character">{current_card["chinese"]}</div>', unsafe_allow_html=True)
-    
-    # Pinyin
-    st.markdown(f'<div class="pinyin">{current_card["pinyin"]}</div>', unsafe_allow_html=True)
+    # Display text content
+    st.write(f"## {current_card['chinese']}")
+    st.write(f"### {current_card['pinyin']}")
     
     # Audio
     try:
         audio_bytes = get_audio_url(current_card["chinese"])
         if audio_bytes:
-            st.markdown('<div class="audio-container">', unsafe_allow_html=True)
             st.audio(audio_bytes, format='audio/mp3')
-            st.markdown('</div>', unsafe_allow_html=True)
     except Exception as e:
         st.error("🔇", icon=None)
     
     # English definition
-    st.markdown(f'<div class="explanation">{current_card["english"]}</div>', unsafe_allow_html=True)
+    st.write(f"### {current_card['english']}")
     
-    st.markdown('</div>', unsafe_allow_html=True)  # Close text-content
-    
-    # Button container
-    st.markdown('<div class="button-container">', unsafe_allow_html=True)
+    # Next button
     if st.button("Next Card"):
         st.session_state.index = (st.session_state.index + 1) % len(flashcards)
         st.rerun()
-    st.markdown('</div>', unsafe_allow_html=True)
-    
-    st.markdown('</div>', unsafe_allow_html=True)  # Close content-wrapper
-    st.markdown('</div>', unsafe_allow_html=True)  # Close main-container
-
-    # Prevent scrolling
-    st.markdown("""
-        <script>
-            document.body.style.overflow = 'hidden';
-            document.body.style.position = 'fixed';
-            document.addEventListener('touchmove', function(e) {
-                e.preventDefault();
-            }, { passive: false });
-        </script>
-    """, unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main()
