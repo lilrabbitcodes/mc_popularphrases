@@ -47,8 +47,8 @@ st.markdown("""
         
         /* Image container */
         .image-container {
-            width: 70% !important;
-            max-height: 15vh !important;
+            width: 50% !important;
+            max-height: 10vh !important;
             display: flex !important;
             justify-content: center !important;
             align-items: center !important;
