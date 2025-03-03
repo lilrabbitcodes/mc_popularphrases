@@ -57,8 +57,8 @@ st.markdown("""
         }
         
         .image-container img {
-            max-height: 15vh !important;
-            max-width: 60% !important;
+            max-height: 10vh !important;
+            max-width: 50% !important;
             width: auto !important;
             object-fit: contain !important;
             margin: 0 auto !important;
