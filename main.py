@@ -270,7 +270,8 @@ def get_audio_url(text):
             audio_path = generate_audio(text)
             with open(audio_path, 'rb') as f:
                 return BytesIO(f.read())
-        except:
+        except Exception as e:
+            print(f"Failed to generate fallback audio: {str(e)}")
             return None
     
     return None
@@ -463,107 +464,38 @@ def main():
     # Initialize session state
     if 'index' not in st.session_state:
         st.session_state.index = 0
-
+    
     # Get current flashcard
     current_card = flashcards[st.session_state.index]
     
-    # CSS for layout
-    st.markdown("""
-        <style>
-            .flashcard {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 10px;
-                padding: 10px;
-                max-width: 600px;
-                margin: 0 auto;
-            }
-            
-            .image-container {
-                width: 100%;
-                max-height: 35vh;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-            
-            .image-container img {
-                max-height: 35vh;
-                width: auto;
-                object-fit: contain;
-            }
-            
-            .chinese-text {
-                font-size: 32px;
-                font-weight: bold;
-                text-align: center;
-                margin: 5px 0;
-            }
-            
-            .pinyin-text {
-                font-size: 20px;
-                color: #666;
-                text-align: center;
-                margin: 5px 0;
-            }
-            
-            .english-text {
-                font-size: 18px;
-                text-align: center;
-                margin: 5px 0;
-            }
-            
-            .stAudio {
-                margin: 5px auto;
-                width: 80%;
-                max-width: 300px;
-            }
-            
-            .stAudio > audio {
-                width: 100%;
-                height: 36px;
-            }
-            
-            .stButton {
-                display: flex;
-                justify-content: center;
-                margin: 10px 0;
-            }
-        </style>
-    """, unsafe_allow_html=True)
+    # Create container for flashcard
+    container = st.container()
     
-    # Create flashcard content
-    st.markdown('<div class="flashcard">', unsafe_allow_html=True)
-    
-    # Image
-    st.markdown('<div class="image-container">', unsafe_allow_html=True)
-    st.image(current_card['meme_url'])
-    st.markdown('</div>', unsafe_allow_html=True)
-    
-    # Chinese text
-    st.markdown(f'<div class="chinese-text">{current_card["chinese"]}</div>', unsafe_allow_html=True)
-    
-    # Pinyin
-    st.markdown(f'<div class="pinyin-text">{current_card["pinyin"]}</div>', unsafe_allow_html=True)
-    
-    # Audio
-    try:
-        audio_bytes = get_audio_url(current_card["chinese"])
-        if audio_bytes:
-            st.audio(audio_bytes, format='audio/mp3')
-    except Exception as e:
-        st.error("🔇", icon=None)
-    
-    # English definition
-    st.markdown(f'<div class="english-text">{current_card["english"]}</div>', unsafe_allow_html=True)
-    
-    # Next button
-    if st.button("Next Card"):
-        st.session_state.index = (st.session_state.index + 1) % len(flashcards)
-        st.rerun()
-    
-    st.markdown('</div>', unsafe_allow_html=True)
+    with container:
+        # Image
+        st.image(current_card['meme_url'], use_column_width=True)
+        
+        # Chinese text
+        st.markdown(f"### {current_card['chinese']}")
+        
+        # Pinyin
+        st.markdown(f"*{current_card['pinyin']}*")
+        
+        # Audio
+        try:
+            audio_bytes = get_audio_url(current_card["chinese"])
+            if audio_bytes:
+                st.audio(audio_bytes, format='audio/mp3')
+        except Exception as e:
+            st.error("Audio not available")
+        
+        # English definition
+        st.markdown(f"**{current_card['english']}**")
+        
+        # Next button
+        if st.button("Next Card"):
+            st.session_state.index = (st.session_state.index + 1) % len(flashcards)
+            st.rerun()
 
 if __name__ == "__main__":
     main()
