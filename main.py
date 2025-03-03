@@ -151,9 +151,32 @@ st.markdown("""
         .button-container {
             display: flex !important;
             justify-content: center !important;
-            gap: 0.8rem !important;
-            margin-top: 0.2rem !important;
-            width: 90% !important;
+            width: 100% !important;
+            margin: 0.3rem auto !important;
+            padding: 0 !important;
+        }
+        
+        /* Top button specific */
+        .top-button {
+            margin-bottom: 0.5rem !important;
+            width: 80% !important;
+        }
+        
+        /* Bottom button specific */
+        .bottom-button {
+            margin-top: 0.5rem !important;
+            width: 80% !important;
+        }
+        
+        /* Button styling */
+        .stButton > button {
+            padding: 0.4rem 1.5rem !important;
+            font-size: 1rem !important;
+            border-radius: 20px !important;
+            min-width: 120px !important;
+            margin: 0 auto !important;
+            display: block !important;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
         }
         
         /* Audio player */
@@ -508,12 +531,10 @@ def main():
         # Create flashcard container
         st.markdown('<div class="flashcard-container">', unsafe_allow_html=True)
         
-        # Top Next button
-        st.markdown('<div class="button-container top-button">', unsafe_allow_html=True)
-        if st.button("Next →", key="next_top"):
+        # Top Next button - directly handle click
+        if st.button("Next Card ↓", key="next_top"):
             st.session_state.index = (st.session_state.index + 1) % len(flashcards)
             st.rerun()
-        st.markdown('</div>', unsafe_allow_html=True)
         
         # Image with extra centering container
         st.markdown('<div class="image-container" style="text-align:center; display:flex; justify-content:center; width:100%;">', unsafe_allow_html=True)
@@ -548,12 +569,10 @@ def main():
         
         st.markdown('</div>', unsafe_allow_html=True)
         
-        # Bottom Back button
-        st.markdown('<div class="button-container bottom-button">', unsafe_allow_html=True)
-        if st.button("← Back", key="back_bottom"):
+        # Bottom Back button - directly handle click
+        if st.button("↑ Previous Card", key="back_bottom"):
             st.session_state.index = (st.session_state.index - 1) % len(flashcards)
             st.rerun()
-        st.markdown('</div>', unsafe_allow_html=True)
         
         st.markdown('</div>', unsafe_allow_html=True)
     
