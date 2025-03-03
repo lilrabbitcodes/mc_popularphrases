@@ -45,25 +45,25 @@ st.markdown("""
             padding: 0.2rem !important;
         }
         
-        /* Image container - Enhanced centering */
+        /* Image container - Extremely small size */
         .image-container {
             width: 100% !important;
             display: flex !important;
             justify-content: center !important;
             align-items: center !important;
             text-align: center !important;
-            margin: 0.3rem auto !important;
+            margin: 0.1rem auto !important;
             padding: 0 !important;
-            max-height: 20vh !important;
+            max-height: 8vh !important;
         }
         
-        /* Force image centering */
+        /* Force very small image */
         .image-container img {
             display: block !important;
             margin-left: auto !important;
             margin-right: auto !important;
-            max-height: 18vh !important;
-            max-width: 80% !important;
+            max-height: 6vh !important; /* Very small vertical size */
+            max-width: 40% !important; /* Very narrow width */
             width: auto !important;
             height: auto !important;
             object-fit: contain !important;
@@ -526,11 +526,11 @@ def main():
         # Create flashcard container
         st.markdown('<div class="flashcard-container">', unsafe_allow_html=True)
         
-        # Enhanced image container for better centering using columns
+        # Image container with extremely small size
         st.markdown('<div class="image-container">', unsafe_allow_html=True)
         col1, col2, col3 = st.columns([1, 2, 1])
         with col2:  # Use only the middle column
-            st.image(current_card['meme_url'], width=120, use_column_width=True)
+            st.image(current_card['meme_url'], width=40) # Extremely small width
         st.markdown('</div>', unsafe_allow_html=True)
         
         # Text content
