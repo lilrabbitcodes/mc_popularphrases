@@ -27,7 +27,7 @@ st.markdown("""
             margin: 0 !important;
             display: flex !important;
             justify-content: center !important;
-            align-items: flex-start !important;
+            align-items: center !important;
             min-height: 100vh !important;
             padding-top: 0 !important;
         }
@@ -37,52 +37,57 @@ st.markdown("""
             display: flex !important;
             flex-direction: column !important;
             align-items: center !important;
-            justify-content: flex-start !important;
+            justify-content: center !important;
             gap: 0.3rem !important;
-            width: 100% !important;
-            max-width: 500px !important;
+            width: 90% !important;
+            max-width: 400px !important;
             margin: 0 auto !important;
             padding: 0.3rem !important;
-            position: relative !important;
-            top: 0 !important;
         }
         
         /* Image container */
         .image-container {
-            width: 90% !important;
-            max-height: 25vh !important;
+            width: 80% !important;
+            max-height: 20vh !important;
             display: flex !important;
             justify-content: center !important;
             align-items: center !important;
-            margin: 0 !important;
+            margin: 0 auto !important;
             padding: 0 !important;
         }
         
         .image-container img {
-            max-height: 25vh !important;
-            max-width: 80% !important;
+            max-height: 20vh !important;
+            max-width: 70% !important;
             width: auto !important;
             object-fit: contain !important;
+            margin: 0 auto !important;
+            display: block !important;
         }
         
         /* Text styles */
         .text-content {
             text-align: center !important;
             width: 100% !important;
-            margin: 0 !important;
+            margin: 0 auto !important;
             display: flex !important;
             flex-direction: column !important;
             align-items: center !important;
             gap: 0.3rem !important;
+            padding: 0 1rem !important;
         }
         
         .text-content h3 {
             margin: 0 !important;
-            font-size: 2rem !important;
+            font-size: 1.8rem !important;
+            text-align: center !important;
+            width: 100% !important;
         }
         
         .text-content p {
             margin: 0 !important;
+            text-align: center !important;
+            width: 100% !important;
         }
         
         /* Button container */
@@ -96,24 +101,29 @@ st.markdown("""
         
         /* Audio player */
         .stAudio {
-            width: 80% !important;
-            max-width: 250px !important;
+            width: 70% !important;
+            max-width: 200px !important;
             margin: 0.2rem auto !important;
         }
         
         .stAudio > audio {
             width: 100% !important;
             height: 32px !important;
+            margin: 0 auto !important;
         }
         
         /* Streamlit elements adjustment */
         .stButton > button {
             padding: 0.3rem 1rem !important;
-            min-width: 100px !important;
+            min-width: 90px !important;
+            margin: 0 auto !important;
         }
         
         div[data-testid="column"] {
             text-align: center !important;
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
         }
     </style>
 """, unsafe_allow_html=True)
@@ -191,7 +201,7 @@ def get_audio_url(text):
             "搞钱": "1ZzZAFqz3Vymss6HQhW82ERrV0Nt16ZBi",
             "丢人": "1Vkm4Hk8Bu8ycglqPrtEqFPZM9BF1Hy_v"
         }
-
+        
         if text in audio_urls:
             file_id = audio_urls[text]
             url = f"https://drive.google.com/uc?id={file_id}"
@@ -224,9 +234,9 @@ def get_audio_url(text):
                 return BytesIO(f.read())
         except Exception as e:
             print(f"Failed to generate fallback audio: {str(e)}")
-            return None
+        return None
 
-    return None
+        return None
 
 # Flashcard data
 flashcards = [
@@ -416,10 +426,10 @@ def main():
     # Initialize session state
     if 'index' not in st.session_state:
         st.session_state.index = 0
-    
-    # Get current flashcard
-    current_card = flashcards[st.session_state.index]
-    
+
+        # Get current flashcard
+        current_card = flashcards[st.session_state.index]
+        
     # Create flashcard container
     st.markdown('<div class="flashcard-container">', unsafe_allow_html=True)
     
@@ -443,8 +453,8 @@ def main():
     except Exception as e:
         st.warning("Audio not available", icon="🔇")
         print(f"Audio error: {str(e)}")
-    
-    # English definition
+        
+        # English definition
     st.markdown(f"**{current_card['english']}**")
     st.markdown('</div>', unsafe_allow_html=True)
     
@@ -461,7 +471,7 @@ def main():
         if st.button("Next →"):
             st.session_state.index = (st.session_state.index + 1) % len(flashcards)
             st.rerun()
-    
+        
     st.markdown('</div>', unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
 
