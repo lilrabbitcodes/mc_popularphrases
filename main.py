@@ -54,18 +54,18 @@ st.markdown("""
             text-align: center !important;
             margin: 10px auto !important;
             padding: 0 !important;
-            min-height: 80px !important;
+            min-height: 160px !important;
             position: relative !important;
             left: 50% !important;
             transform: translateX(-50%) !important;
         }
         
-        /* Image with perfect centering */
+        /* Image with perfect centering - 2x larger */
         .image-container img {
             display: block !important;
             margin: 0 auto !important;
-            max-height: 100px !important;
-            max-width: 100px !important;
+            max-height: 200px !important;
+            max-width: 200px !important;
             width: auto !important;
             height: auto !important;
             object-fit: contain !important;
@@ -134,8 +134,10 @@ st.markdown("""
             font-size: 1.1rem !important;
             font-weight: bold !important;
             margin: 0 auto !important;
+            margin-bottom: 15px !important;
             text-align: center !important;
             width: 100% !important;
+            padding-bottom: 10px !important;
         }
         
         /* Button container */
@@ -148,16 +150,17 @@ st.markdown("""
             padding: 0 !important;
         }
         
-        /* Button styling */
+        /* Button styling with reduced border radius */
         .stButton > button {
             padding: 0.5rem 1rem !important;
             font-size: 0.9rem !important;
-            border-radius: 20px !important;
+            border-radius: 8px !important;
             min-width: 100px !important;
             margin: 0 auto !important;
             display: block !important;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
             transition: all 0.2s ease !important;
+            margin-top: 15px !important;
         }
         
         .stButton > button:hover {
@@ -540,10 +543,13 @@ def main():
         # Create flashcard container
         st.markdown('<div class="flashcard-container">', unsafe_allow_html=True)
         
-        # Image container with pixel dimensions 
+        # Image container with enhanced centering
         st.markdown('<div class="image-container">', unsafe_allow_html=True)
-        # Image with specific width in pixels - you can change this number
-        st.image(current_card['meme_url'], width=100)  # Width = 100 pixels
+        # Use columns for better centering control
+        col1, col2, col3 = st.columns([1, 3, 1])
+        with col2:
+            # Centered image with doubled width (2x larger)
+            st.image(current_card['meme_url'], width=200, use_column_width=False)
         st.markdown('</div>', unsafe_allow_html=True)
         
         # Text content
