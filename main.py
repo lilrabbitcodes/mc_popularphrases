@@ -47,13 +47,14 @@ st.markdown("""
         
         /* Image container */
         .image-container {
-            width: 40% !important;
+            width: 100% !important;
             max-height: 8vh !important;
             display: flex !important;
             justify-content: center !important;
             align-items: center !important;
             margin: 0 auto !important;
             padding: 0 !important;
+            text-align: center !important;
         }
         
         .image-container img {
@@ -63,6 +64,9 @@ st.markdown("""
             object-fit: contain !important;
             margin: 0 auto !important;
             display: block !important;
+            position: relative !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
         }
         
         /* Text styles */
