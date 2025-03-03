@@ -23,8 +23,10 @@ st.markdown("""
         .viewerBadge_link__1QSob {display: none !important;}
         button[title="View fullscreen"] {display: none !important;}
         
-        /* Make app static and prevent scrolling */
+        /* Base styles */
         body {
+            margin: 0 !important;
+            padding: 0 !important;
             overflow: hidden !important;
             position: fixed !important;
             width: 100% !important;
@@ -32,116 +34,141 @@ st.markdown("""
         }
         
         .stApp {
-            height: 100vh !important;
-            overflow: hidden !important;
-            position: fixed !important;
-            width: 100% !important;
-            padding: 0 !important;
             margin: 0 !important;
+            padding: 0 !important;
+            height: 100vh !important;
+            max-height: 100vh !important;
+            overflow: hidden !important;
         }
         
         .main .block-container {
-            padding: 0 !important;
             margin: 0 !important;
-            max-width: 100% !important;
+            padding: 0 !important;
+            max-width: none !important;
         }
         
         /* Main container */
         .main-container {
             display: flex !important;
             flex-direction: column !important;
-            align-items: center !important;
-            justify-content: space-between !important;
             height: 100vh !important;
+            max-height: 100vh !important;
             padding: 10px !important;
             box-sizing: border-box !important;
+            gap: 10px !important;
+        }
+        
+        /* Content wrapper */
+        .content-wrapper {
+            flex: 1 !important;
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 10px !important;
+            min-height: 0 !important;
         }
         
         /* Image container */
         .image-container {
-            width: 100% !important;
+            flex: 0 0 auto !important;
             display: flex !important;
             justify-content: center !important;
             align-items: center !important;
-            flex: 0 0 auto !important;
-            max-height: 35vh !important;
+            max-height: 40vh !important;
             margin-bottom: 10px !important;
         }
         
-        .element-container img {
-            max-height: 30vh !important;
+        .image-container img {
+            max-height: 35vh !important;
             width: auto !important;
             object-fit: contain !important;
-            margin: 0 auto !important;
         }
         
         /* Text content */
         .text-content {
-            width: 100% !important;
+            flex: 0 0 auto !important;
             display: flex !important;
             flex-direction: column !important;
             align-items: center !important;
             gap: 5px !important;
-            flex: 0 0 auto !important;
+            margin-bottom: 10px !important;
         }
         
         .character {
             font-size: 32px !important;
             font-weight: bold !important;
-            margin: 2px 0 !important;
-            text-align: center !important;
             line-height: 1.2 !important;
+            margin: 0 !important;
         }
         
         .pinyin {
             font-size: 18px !important;
             color: #666 !important;
-            margin: 2px 0 !important;
-            text-align: center !important;
             line-height: 1.2 !important;
+            margin: 0 !important;
         }
         
         .explanation {
             font-size: 16px !important;
-            font-weight: 500 !important;
-            margin: 2px 0 !important;
-            text-align: center !important;
-            padding: 0 10px !important;
             line-height: 1.2 !important;
+            margin: 0 !important;
+            padding: 0 10px !important;
+            text-align: center !important;
         }
         
-        /* Audio player */
+        /* Audio container */
         .audio-container {
-            width: 100% !important;
             display: flex !important;
             justify-content: center !important;
             align-items: center !important;
-            margin: 5px auto !important;
-            flex: 0 0 auto !important;
+            margin: 5px 0 !important;
+            height: 35px !important;
         }
         
-        div.stAudio {
-            margin: 0 auto !important;
-            width: auto !important;
+        .stAudio {
+            margin: 0 !important;
+            padding: 0 !important;
+            height: 35px !important;
         }
         
-        div.stAudio > audio {
+        .stAudio > audio {
             width: 35px !important;
             height: 35px !important;
+            padding: 0 !important;
+            margin: 0 !important;
             border-radius: 50% !important;
-            background-color: #666666 !important;
+        }
+        
+        /* Button container */
+        .button-container {
+            flex: 0 0 auto !important;
+            display: flex !important;
+            justify-content: center !important;
+            margin-top: auto !important;
+            padding: 10px 0 !important;
+        }
+        
+        .stButton {
+            margin: 0 !important;
+        }
+        
+        .stButton > button {
+            margin: 0 !important;
+            padding: 10px 20px !important;
+            background-color: white !important;
+            color: black !important;
+            border: 2px solid black !important;
+            border-radius: 5px !important;
+            font-weight: 500 !important;
+            width: 120px !important;
         }
         
         /* Hide audio controls except play button */
         audio::-webkit-media-controls-panel {
             background-color: #666666 !important;
-            display: flex !important;
-            justify-content: center !important;
         }
         
         audio::-webkit-media-controls-play-button {
             transform: scale(1.2) !important;
-            margin: 0 !important;
         }
         
         audio::-webkit-media-controls-timeline,
@@ -152,33 +179,10 @@ st.markdown("""
             display: none !important;
         }
         
-        /* Button styling */
-        .button-container {
-            width: 100% !important;
-            display: flex !important;
-            justify-content: center !important;
-            margin-top: 10px !important;
-            flex: 0 0 auto !important;
-        }
-        
-        .stButton {
-            margin: 0 auto !important;
-        }
-        
-        .stButton > button {
-            background-color: white !important;
-            color: black !important;
-            border: 2px solid black !important;
-            border-radius: 5px !important;
-            padding: 5px 15px !important;
-            font-weight: 500 !important;
-            width: 120px !important;
-        }
-        
-        /* Warning and error messages */
+        /* Error messages */
         .stAlert {
-            padding: 2px !important;
-            margin: 2px 0 !important;
+            padding: 0 !important;
+            margin: 0 !important;
         }
     </style>
 """, unsafe_allow_html=True)
@@ -483,61 +487,53 @@ def main():
     if 'index' not in st.session_state:
         st.session_state.index = 0
 
-    # Create a container with fixed height for mobile optimization
-    with st.container():
-        # Get current flashcard
-        current_card = flashcards[st.session_state.index]
-        
-        # Main container
-        st.markdown("""
-            <div class="main-container">
-                <div class="content-wrapper">
-        """, unsafe_allow_html=True)
-        
-        # Image container
-        st.markdown('<div class="image-container">', unsafe_allow_html=True)
-        st.image(current_card['meme_url'], use_column_width=False)
-        st.markdown('</div>', unsafe_allow_html=True)
-        
-        # Text content wrapper
-        st.markdown('<div class="text-content">', unsafe_allow_html=True)
-        
-        # Chinese character
-        st.markdown(f"""
-            <div class="character">{current_card['chinese']}</div>
-        """, unsafe_allow_html=True)
-        
-        # Pinyin
-        st.markdown(f"""
-            <div class="pinyin">{current_card['pinyin']}</div>
-        """, unsafe_allow_html=True)
-        
-        # Audio below pinyin
-        try:
-            audio_bytes = get_audio_url(current_card["chinese"])
-            if audio_bytes:
-                st.markdown('<div class="audio-container">', unsafe_allow_html=True)
-                st.audio(audio_bytes, format='audio/mp3')
-                st.markdown('</div>', unsafe_allow_html=True)
-        except Exception as e:
-            st.error("🔇", icon=None)
-        
-        # English definition
-        st.markdown(f"""
-            <div class="explanation">{current_card['english']}</div>
-        """, unsafe_allow_html=True)
-        
-        st.markdown('</div>', unsafe_allow_html=True)  # Close text-content
-        
-        # Button container
-        st.markdown('<div class="button-container">', unsafe_allow_html=True)
-        if st.button("Next Card"):
-            st.session_state.index = (st.session_state.index + 1) % len(flashcards)
-            st.rerun()
-        st.markdown('</div>', unsafe_allow_html=True)
-        
-        # Close main container
-        st.markdown("</div>", unsafe_allow_html=True)
+    # Get current flashcard
+    current_card = flashcards[st.session_state.index]
+    
+    # Main container
+    st.markdown('<div class="main-container">', unsafe_allow_html=True)
+    
+    # Content wrapper
+    st.markdown('<div class="content-wrapper">', unsafe_allow_html=True)
+    
+    # Image
+    st.markdown('<div class="image-container">', unsafe_allow_html=True)
+    st.image(current_card['meme_url'], use_column_width=False)
+    st.markdown('</div>', unsafe_allow_html=True)
+    
+    # Text content
+    st.markdown('<div class="text-content">', unsafe_allow_html=True)
+    
+    # Chinese character
+    st.markdown(f'<div class="character">{current_card["chinese"]}</div>', unsafe_allow_html=True)
+    
+    # Pinyin
+    st.markdown(f'<div class="pinyin">{current_card["pinyin"]}</div>', unsafe_allow_html=True)
+    
+    # Audio
+    try:
+        audio_bytes = get_audio_url(current_card["chinese"])
+        if audio_bytes:
+            st.markdown('<div class="audio-container">', unsafe_allow_html=True)
+            st.audio(audio_bytes, format='audio/mp3')
+            st.markdown('</div>', unsafe_allow_html=True)
+    except Exception as e:
+        st.error("🔇", icon=None)
+    
+    # English definition
+    st.markdown(f'<div class="explanation">{current_card["english"]}</div>', unsafe_allow_html=True)
+    
+    st.markdown('</div>', unsafe_allow_html=True)  # Close text-content
+    
+    # Button container
+    st.markdown('<div class="button-container">', unsafe_allow_html=True)
+    if st.button("Next Card"):
+        st.session_state.index = (st.session_state.index + 1) % len(flashcards)
+        st.rerun()
+    st.markdown('</div>', unsafe_allow_html=True)
+    
+    st.markdown('</div>', unsafe_allow_html=True)  # Close content-wrapper
+    st.markdown('</div>', unsafe_allow_html=True)  # Close main-container
 
     # Prevent scrolling
     st.markdown("""
