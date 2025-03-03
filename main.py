@@ -68,24 +68,54 @@ st.markdown("""
         /* Text styles */
         .text-content {
             text-align: center !important;
-            width: 90% !important;
+            width: 100% !important;
             margin: 0 auto !important;
             display: flex !important;
             flex-direction: column !important;
             align-items: center !important;
+            justify-content: center !important;
             gap: 0.2rem !important;
-            padding: 0 0.5rem !important;
+            padding: 0 !important;
         }
         
         .text-content h3 {
-            margin: 0 !important;
+            margin: 0 auto !important;
             font-size: 1.6rem !important;
+            text-align: center !important;
+            width: 100% !important;
+            padding: 0 !important;
+        }
+        
+        .text-content p, .text-content div {
+            margin: 0 auto !important;
+            text-align: center !important;
+            width: 100% !important;
+            padding: 0 !important;
+        }
+        
+        /* Chinese text specific */
+        .chinese-text {
+            font-size: 1.6rem !important;
+            font-weight: bold !important;
+            margin: 0 auto !important;
             text-align: center !important;
             width: 100% !important;
         }
         
-        .text-content p {
-            margin: 0 !important;
+        /* Pinyin text specific */
+        .pinyin-text {
+            font-size: 1.2rem !important;
+            font-style: italic !important;
+            margin: 0 auto !important;
+            text-align: center !important;
+            width: 100% !important;
+        }
+        
+        /* English text specific */
+        .english-text {
+            font-size: 1.1rem !important;
+            font-weight: bold !important;
+            margin: 0 auto !important;
             text-align: center !important;
             width: 100% !important;
         }
@@ -458,8 +488,12 @@ def main():
         
         # Text content
         st.markdown('<div class="text-content">', unsafe_allow_html=True)
-        st.markdown(f"### {current_card['chinese']}")
-        st.markdown(f"*{current_card['pinyin']}*")
+        
+        # Chinese text
+        st.markdown(f'<div class="chinese-text">{current_card["chinese"]}</div>', unsafe_allow_html=True)
+        
+        # Pinyin
+        st.markdown(f'<div class="pinyin-text">{current_card["pinyin"]}</div>', unsafe_allow_html=True)
         
         # Audio
         try:
@@ -473,7 +507,8 @@ def main():
             print(f"Audio error: {str(e)}")
         
         # English definition
-        st.markdown(f"**{current_card['english']}**")
+        st.markdown(f'<div class="english-text">{current_card["english"]}</div>', unsafe_allow_html=True)
+        
         st.markdown('</div>', unsafe_allow_html=True)
         
         # Navigation buttons
