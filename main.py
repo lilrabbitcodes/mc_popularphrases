@@ -68,9 +68,9 @@ st.markdown("""
         .image-container img {
             display: block !important;
             margin: 0 auto !important;
-            max-height: 45vh !important;
+            max-height: 25vh !important;
             width: auto !important;
-            max-width: 100% !important;
+            max-width: 200px !important;
             object-fit: contain !important;
             position: relative !important;
             left: 50% !important;
@@ -87,8 +87,8 @@ st.markdown("""
             }
             
             .image-container img {
-                max-width: 90% !important;
-                max-height: 35vh !important;
+                max-width: 180px !important;
+                max-height: 20vh !important;
             }
         }
         
