@@ -45,31 +45,28 @@ st.markdown("""
             padding: 0.2rem !important;
         }
         
-        /* Image container - Small but visible */
+        /* Image container with numeric values */
         .image-container {
-            width: 100% !important;
+            width: 100% !important; /* Full container width */
             display: flex !important;
             justify-content: center !important;
             align-items: center !important;
             text-align: center !important;
-            margin: 0.3rem auto !important;
+            margin: 10px auto !important; /* 10px top/bottom margin */
             padding: 0 !important;
-            max-height: 15vh !important;
-            overflow: visible !important;
+            min-height: 80px !important; /* Container minimum height: 80px */
         }
         
-        /* Force visible image */
+        /* Image with specific pixel sizes */
         .image-container img {
             display: block !important;
             margin-left: auto !important;
             margin-right: auto !important;
-            max-height: 12vh !important;
-            max-width: 120px !important;
+            max-height: 100px !important; /* Maximum height: 100px */
+            max-width: 100px !important; /* Maximum width: 100px */
             width: auto !important;
             height: auto !important;
             object-fit: contain !important;
-            visibility: visible !important;
-            opacity: 1 !important;
         }
         
         /* Text styles */
@@ -529,11 +526,10 @@ def main():
         # Create flashcard container
         st.markdown('<div class="flashcard-container">', unsafe_allow_html=True)
         
-        # Image container with extremely small size
+        # Image container with pixel dimensions 
         st.markdown('<div class="image-container">', unsafe_allow_html=True)
-        col1, col2, col3 = st.columns([1, 2, 1])
-        with col2:  # Use only the middle column
-            st.image(current_card['meme_url'], width=40) # Extremely small width
+        # Image with specific width in pixels - you can change this number
+        st.image(current_card['meme_url'], width=100)  # Width = 100 pixels
         st.markdown('</div>', unsafe_allow_html=True)
         
         # Text content
