@@ -60,9 +60,9 @@ st.markdown("""
         }
         
         .image-container img {
-            max-height: 10vh !important;
+            max-height: 15vh !important;
             width: auto !important;
-            max-width: 100px !important;
+            max-width: 150px !important;
             margin-left: auto !important;
             margin-right: auto !important;
             display: block !important;
