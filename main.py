@@ -201,6 +201,21 @@ st.markdown("""
             align-items: center !important;
             width: 100% !important;
         }
+
+        /* Override Streamlit's image display for better centering */
+        .stImage {
+            text-align: center !important;
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            margin: 0 auto !important;
+            width: 100% !important;
+        }
+        
+        .stImage > img {
+            margin: 0 auto !important;
+            display: block !important;
+        }
     </style>
 """, unsafe_allow_html=True)
 
@@ -510,17 +525,10 @@ def main():
         # Create flashcard container
         st.markdown('<div class="flashcard-container">', unsafe_allow_html=True)
         
-        # Next button at the top
-        if st.button("Next →", key="next_button"):
-            st.session_state.index = (st.session_state.index + 1) % len(flashcards)
-            st.rerun()
-        
-        # Image with extra centering container
-        st.markdown('<div class="image-container" style="text-align:center; display:flex; justify-content:center; width:100%;">', unsafe_allow_html=True)
-        # Center image with additional inline styles
-        st.markdown('<div style="margin:0 auto; text-align:center; width:100%;">', unsafe_allow_html=True)
-        st.image(current_card['meme_url'], width=180)
-        st.markdown('</div>', unsafe_allow_html=True)
+        # Simplified image container for better centering
+        st.markdown('<div class="image-container">', unsafe_allow_html=True)
+        # Set a smaller width directly in the st.image function for better control
+        st.image(current_card['meme_url'], width=160, use_column_width=False)
         st.markdown('</div>', unsafe_allow_html=True)
         
         # Text content
@@ -543,15 +551,15 @@ def main():
             st.warning("Audio not available", icon="🔇")
             print(f"Audio error: {str(e)}")
         
+        # Next button right after audio
+        if st.button("Next →", key="next_button"):
+            st.session_state.index = (st.session_state.index + 1) % len(flashcards)
+            st.rerun()
+        
         # English definition
         st.markdown(f'<div class="english-text">{current_card["english"]}</div>', unsafe_allow_html=True)
         
         st.markdown('</div>', unsafe_allow_html=True)
-        
-        # Back button at the bottom
-        if st.button("← Previous", key="back_button"):
-            st.session_state.index = (st.session_state.index - 1) % len(flashcards)
-            st.rerun()
         
         st.markdown('</div>', unsafe_allow_html=True)
     
