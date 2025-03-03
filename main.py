@@ -151,32 +151,35 @@ st.markdown("""
         .button-container {
             display: flex !important;
             justify-content: center !important;
+            align-items: center !important;
             width: 100% !important;
-            margin: 0.3rem auto !important;
+            margin: 0.5rem auto !important;
             padding: 0 !important;
-        }
-        
-        /* Top button specific */
-        .top-button {
-            margin-bottom: 0.5rem !important;
-            width: 80% !important;
-        }
-        
-        /* Bottom button specific */
-        .bottom-button {
-            margin-top: 0.5rem !important;
-            width: 80% !important;
         }
         
         /* Button styling */
         .stButton > button {
-            padding: 0.4rem 1.5rem !important;
-            font-size: 1rem !important;
+            padding: 0.5rem 1rem !important;
+            font-size: 0.9rem !important;
             border-radius: 20px !important;
-            min-width: 120px !important;
+            min-width: 100px !important;
             margin: 0 auto !important;
             display: block !important;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+            transition: all 0.2s ease !important;
+        }
+        
+        .stButton > button:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15) !important;
+        }
+        
+        /* Column alignment for buttons */
+        [data-testid="column"] {
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            padding: 0 0.3rem !important;
         }
         
         /* Audio player */
@@ -531,11 +534,6 @@ def main():
         # Create flashcard container
         st.markdown('<div class="flashcard-container">', unsafe_allow_html=True)
         
-        # Top Next button - directly handle click
-        if st.button("Next Card ↓", key="next_top"):
-            st.session_state.index = (st.session_state.index + 1) % len(flashcards)
-            st.rerun()
-        
         # Image with extra centering container
         st.markdown('<div class="image-container" style="text-align:center; display:flex; justify-content:center; width:100%;">', unsafe_allow_html=True)
         # Center image with additional inline styles
@@ -569,10 +567,21 @@ def main():
         
         st.markdown('</div>', unsafe_allow_html=True)
         
-        # Bottom Back button - directly handle click
-        if st.button("↑ Previous Card", key="back_bottom"):
-            st.session_state.index = (st.session_state.index - 1) % len(flashcards)
-            st.rerun()
+        # Navigation buttons at the bottom
+        st.markdown('<div class="button-container">', unsafe_allow_html=True)
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            if st.button("← Previous", key="back_button"):
+                st.session_state.index = (st.session_state.index - 1) % len(flashcards)
+                st.rerun()
+        
+        with col2:
+            if st.button("Next →", key="next_button"):
+                st.session_state.index = (st.session_state.index + 1) % len(flashcards)
+                st.rerun()
+                
+        st.markdown('</div>', unsafe_allow_html=True)
         
         st.markdown('</div>', unsafe_allow_html=True)
     
