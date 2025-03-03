@@ -490,7 +490,7 @@ def main():
     # Get current flashcard
     current_card = flashcards[st.session_state.index]
     
-    # Basic styling
+    # Styling with proper centering
     st.markdown("""
         <style>
             /* Hide Streamlit elements */
@@ -498,63 +498,114 @@ def main():
             #MainMenu {display: none !important;}
             header {display: none !important;}
             
+            /* Center the main block container */
+            .block-container {
+                max-width: 800px !important;
+                padding-top: 1rem !important;
+                padding-bottom: 1rem !important;
+                margin: 0 auto !important;
+            }
+            
             /* Container styles */
             .flashcard-container {
-                max-width: 600px;
-                margin: 0 auto;
-                padding: 10px;
-                text-align: center;
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                justify-content: center !important;
+                padding: 1rem !important;
+                margin: 0 auto !important;
+                max-width: 600px !important;
+                text-align: center !important;
             }
             
             /* Image styles */
             .image-container {
-                margin: 10px auto;
-                max-width: 300px;
+                width: 100% !important;
+                max-width: 300px !important;
+                margin: 0 auto !important;
+                display: flex !important;
+                justify-content: center !important;
+                align-items: center !important;
             }
             
             .image-container img {
-                max-width: 100%;
-                height: auto;
+                max-width: 100% !important;
+                height: auto !important;
+                object-fit: contain !important;
             }
             
             /* Text styles */
             .chinese-text {
-                font-size: 32px;
-                font-weight: bold;
-                margin: 10px 0;
+                font-size: 32px !important;
+                font-weight: bold !important;
+                margin: 10px 0 !important;
+                text-align: center !important;
+                width: 100% !important;
             }
             
             .pinyin-text {
-                font-size: 20px;
-                color: #666;
-                margin: 5px 0;
+                font-size: 20px !important;
+                color: #666 !important;
+                margin: 5px 0 !important;
+                text-align: center !important;
+                width: 100% !important;
             }
             
             .english-text {
-                font-size: 18px;
-                margin: 10px 0;
+                font-size: 18px !important;
+                margin: 10px 0 !important;
+                text-align: center !important;
+                width: 100% !important;
             }
             
             /* Audio styles */
             .stAudio {
-                margin: 10px auto;
-                width: 40px;
+                display: flex !important;
+                justify-content: center !important;
+                margin: 10px auto !important;
+                width: 40px !important;
             }
             
             .stAudio > audio {
-                width: 40px;
-                height: 40px;
-                border-radius: 50%;
+                width: 40px !important;
+                height: 40px !important;
+                border-radius: 50% !important;
+                background-color: #666666 !important;
+            }
+            
+            audio::-webkit-media-controls-panel {
+                background-color: #666666 !important;
+                justify-content: center !important;
+            }
+            
+            audio::-webkit-media-controls-play-button {
+                transform: scale(1.5) !important;
+                margin: 0 !important;
+            }
+            
+            audio::-webkit-media-controls-timeline,
+            audio::-webkit-media-controls-current-time-display,
+            audio::-webkit-media-controls-time-remaining-display,
+            audio::-webkit-media-controls-volume-slider,
+            audio::-webkit-media-controls-mute-button {
+                display: none !important;
             }
             
             /* Button styles */
+            .stButton {
+                display: flex !important;
+                justify-content: center !important;
+                width: 100% !important;
+            }
+            
             .stButton > button {
-                margin-top: 10px;
-                padding: 8px 24px;
-                font-size: 16px;
-                border-radius: 20px;
-                background-color: #f0f2f6;
-                border: none;
+                margin-top: 10px !important;
+                padding: 8px 24px !important;
+                font-size: 16px !important;
+                border-radius: 20px !important;
+                background-color: #f0f2f6 !important;
+                border: none !important;
+                width: 120px !important;
             }
         </style>
     """, unsafe_allow_html=True)
